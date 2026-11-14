@@ -1,0 +1,19 @@
+{
+  "server": {
+    "domain": "wlo.kiaoragaming.xyz",
+    "game_port": 5423,
+    "api_port": 5423,
+    "use_https": true,
+    "protocol": "https"
+  },
+  "local_development": {
+    "domain": "localhost",
+    "game_port": 6414,
+    "api_port": 8090,
+    "use_https": false,
+    "protocol": "http"
+  },
+  "description": "Server configuration for Wonderland Online",
+  "created": "2024-11-15",
+  "version": "1.0"
+}

@@ -1,0 +1,272 @@
+[2026-11-15 01:56:46,672] INFO: ======================================================================
+[2026-11-15 01:56:46,674] INFO: 🎮 WONDERLAND ONLINE - GAME SERVER
+[2026-11-15 01:56:46,674] INFO: ======================================================================
+[2026-11-15 01:56:46,674] INFO: ✅ Server started on 0.0.0.0:6414
+[2026-11-15 01:56:46,674] INFO: 📍 Ready to accept player connections...
+[2026-11-15 01:56:46,674] INFO: ======================================================================
+[2026-11-15 01:57:33,510] INFO: ✅ PLAYER CONNECTED
+[2026-11-15 01:57:33,510] INFO:    IP: 127.0.0.1:56012
+[2026-11-15 01:57:33,516] INFO:    Session ID: 1
+[2026-11-15 01:57:33,518] INFO: [Session 1] Sent welcome packet
+[2026-11-15 01:57:33,518] INFO: [Session 1] ← Received: Y鬭
+[2026-11-15 01:59:13,552] INFO: ======================================================================
+[2026-11-15 01:59:13,552] INFO: 🎮 WONDERLAND ONLINE - GAME SERVER
+[2026-11-15 01:59:13,552] INFO: ======================================================================
+[2026-11-15 01:59:13,552] INFO: ✅ Server started on 0.0.0.0:6414
+[2026-11-15 01:59:13,553] INFO: 📍 Ready to accept player connections...
+[2026-11-15 01:59:13,553] INFO: ======================================================================
+[2026-11-15 01:59:34,847] INFO: ✅ PLAYER CONNECTED
+[2026-11-15 01:59:34,848] INFO:    IP: 127.0.0.1:62823
+[2026-11-15 01:59:34,848] INFO:    Session ID: 1
+[2026-11-15 01:59:34,848] INFO: [Session 1] Sent welcome packet
+[2026-11-15 01:59:34,866] INFO: [Session 1] ← Received: Y鬭
+[2026-11-15 01:59:38,026] INFO: [Session 1] Connection closed by client
+[2026-11-15 01:59:38,026] INFO: [Session 1] ❌ DISCONNECTED (Total: 0)
+[02:00:21] ======================================================================
+[02:00:21] 🎮 WONDERLAND ONLINE - GAME SERVER
+[02:00:21] ======================================================================
+[02:00:21] ✅ Listening on 0.0.0.0:6414
+[02:00:21] 📍 Auto-authenticates all players
+[02:00:21] ⏱️  Timeout: 120 seconds
+[02:00:21] ======================================================================
+[02:01:06] [Session 1] ✅ CONNECTED from 127.0.0.1:55950
+[02:01:06] [Session 1] → Sent: WLO_SERVER_V1.0
+[02:01:06] [Session 1] ✅ AUTO-AUTHENTICATED
+[02:01:06] [Session 1] ← Received: Y鬭
+[02:01:10] [Session 1] ❌ DISCONNECTED (connection closed)
+[02:01:10] [Session 1] 🔌 CLOSED
+[02:06:54] ======================================================================
+[02:06:54] 🎮 WONDERLAND ONLINE - GAME SERVER
+[02:06:54] ======================================================================
+[02:06:54] Loading game data...
+[02:06:54] 
+[02:06:54] ✓ Loaded npc.dat (468.7 KB)
+[02:06:54] ✓ Loaded item.dat (1432.6 KB)
+[02:06:54] ✓ Loaded skill.dat (90.8 KB)
+[02:06:54] ✓ Loaded talk.dat (2186.6 KB)
+[02:06:54] ✓ Loaded compound.dat (10.7 KB)
+[02:06:54] ✓ Loaded compound2.dat (41.6 KB)
+[02:06:54] ✓ Loaded formula.dat (0.4 KB)
+[02:06:54] ✓ Loaded ground.mmg (15138.3 KB)
+[02:06:54] ✓ Loaded scenedata.dat (103.0 KB)
+[02:06:54] ✓ Loaded wem.mmg (269.5 KB)
+[02:06:54] ✓ Loaded mark.dat (643.2 KB)
+[02:06:54] ✓ Loaded eve.Emg (1851.2 KB)
+[02:06:54] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:06:54] 
+[02:06:54] ✅ Loaded 13 data files
+[02:06:54] ======================================================================
+[02:06:54] ✅ Listening on 0.0.0.0:6414
+[02:06:54] 📍 Serving 13 game data files
+[02:06:54] ⏱️  Timeout: 120 seconds
+[02:06:54] ======================================================================
+[02:06:57] [Session 1] ✅ CONNECTED from 127.0.0.1:58970
+[02:06:57] [Session 1] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:06:57] [Session 1] ✅ AUTO-AUTHENTICATED
+[02:06:57] [Session 1] ← Y鬭
+[02:07:08] [Session 1] ❌ DISCONNECTED (connection closed)
+[02:07:08] [Session 1] 🔌 CLOSED
+[02:18:29] ======================================================================
+[02:18:29] 🎮 WONDERLAND ONLINE - GAME SERVER
+[02:18:29] ======================================================================
+[02:18:29] Loading game data...
+[02:18:29] 
+[02:18:29] ✓ Loaded npc.dat (468.7 KB)
+[02:18:29] ✓ Loaded item.dat (1432.6 KB)
+[02:18:29] ✓ Loaded skill.dat (90.8 KB)
+[02:18:29] ✓ Loaded talk.dat (2186.6 KB)
+[02:18:29] ✓ Loaded compound.dat (10.7 KB)
+[02:18:29] ✓ Loaded compound2.dat (41.6 KB)
+[02:18:29] ✓ Loaded formula.dat (0.4 KB)
+[02:18:29] ✓ Loaded ground.mmg (15138.3 KB)
+[02:18:29] ✓ Loaded scenedata.dat (103.0 KB)
+[02:18:29] ✓ Loaded wem.mmg (269.5 KB)
+[02:18:29] ✓ Loaded mark.dat (643.2 KB)
+[02:18:29] ✓ Loaded eve.Emg (1851.2 KB)
+[02:18:29] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:18:29] 
+[02:18:29] ✅ Loaded 13 data files
+[02:18:29] ======================================================================
+[02:18:29] ✅ Listening on 0.0.0.0:6414
+[02:18:29] 📍 Serving 13 game data files
+[02:18:29] ⏱️  Timeout: 120 seconds
+[02:18:29] ======================================================================
+[02:19:54] [Session 2] ✅ CONNECTED from 127.0.0.1:55307
+[02:19:54] [Session 2] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:19:54] [Session 2] ✅ AUTO-AUTHENTICATED
+[02:19:54] [Session 2] ❌ DISCONNECTED (reset)
+[02:19:54] [Session 2] 🔌 CLOSED
+[02:21:18] [Session 3] ✅ CONNECTED from 127.0.0.1:58074
+[02:21:18] [Session 3] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:21:18] [Session 3] ✅ AUTO-AUTHENTICATED
+[02:21:18] [Session 3] ← Y鬭
+[02:21:50] ======================================================================
+[02:21:50] 🎮 WONDERLAND ONLINE - GAME SERVER
+[02:21:50] ======================================================================
+[02:21:50] Loading game data...
+[02:21:50] 
+[02:21:50] ✓ Loaded npc.dat (468.7 KB)
+[02:21:50] ✓ Loaded item.dat (1432.6 KB)
+[02:21:50] ✓ Loaded skill.dat (90.8 KB)
+[02:21:50] ✓ Loaded talk.dat (2186.6 KB)
+[02:21:50] ✓ Loaded compound.dat (10.7 KB)
+[02:21:50] ✓ Loaded compound2.dat (41.6 KB)
+[02:21:50] ✓ Loaded formula.dat (0.4 KB)
+[02:21:50] ✓ Loaded ground.mmg (15138.3 KB)
+[02:21:50] ✓ Loaded scenedata.dat (103.0 KB)
+[02:21:50] ✓ Loaded wem.mmg (269.5 KB)
+[02:21:50] ✓ Loaded mark.dat (643.2 KB)
+[02:21:50] ✓ Loaded eve.Emg (1851.2 KB)
+[02:21:50] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:21:50] 
+[02:21:50] ✅ Loaded 13 data files
+[02:21:50] ======================================================================
+[02:21:50] ✅ Listening on 0.0.0.0:6414
+[02:21:50] 📍 Serving 13 game data files
+[02:21:50] ⏱️  Timeout: 120 seconds
+[02:21:50] ======================================================================
+[02:21:50] [Session 3] ❌ DISCONNECTED (connection closed)
+[02:21:50] [Session 3] 🔌 CLOSED
+[02:22:25] [Session 4] ✅ CONNECTED from 127.0.0.1:55408
+[02:22:25] [Session 4] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:22:25] [Session 4] ✅ AUTO-AUTHENTICATED
+[02:22:26] [Session 4] ❌ DISCONNECTED (connection closed)
+[02:22:26] [Session 4] 🔌 CLOSED
+[02:31:53] ======================================================================
+[02:31:53] 🎮 WONDERLAND ONLINE - GAME SERVER v2
+[02:31:53] ======================================================================
+[02:31:53] Loading game data...
+[02:31:53] 
+[02:31:53] ✓ Loaded npc.dat (468.7 KB)
+[02:31:53] ✓ Loaded item.dat (1432.6 KB)
+[02:31:53] ✓ Loaded skill.dat (90.8 KB)
+[02:31:53] ✓ Loaded talk.dat (2186.6 KB)
+[02:31:53] ✓ Loaded compound.dat (10.7 KB)
+[02:31:53] ✓ Loaded compound2.dat (41.6 KB)
+[02:31:53] ✓ Loaded formula.dat (0.4 KB)
+[02:31:53] ✓ Loaded ground.mmg (15138.3 KB)
+[02:31:53] ✓ Loaded scenedata.dat (103.0 KB)
+[02:31:53] ✓ Loaded wem.mmg (269.5 KB)
+[02:31:53] ✓ Loaded mark.dat (643.2 KB)
+[02:31:53] ✓ Loaded eve.Emg (1851.2 KB)
+[02:31:53] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:31:53] 
+[02:31:53] ✅ Loaded 13 data files
+[02:31:53] ======================================================================
+[02:31:53] ✅ Listening on 0.0.0.0:6414
+[02:31:53] 📍 Serving 13 game data files
+[02:31:53] ⏱️  Client timeout: 120 seconds
+[02:31:53] ======================================================================
+[02:31:53] Waiting for connections...
+[02:31:53] ======================================================================
+[02:32:01] [Session 5] ✅ CONNECTED from 127.0.0.1:65157
+[02:32:01] [Session 5] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:32:01] [Session 5] ✅ AUTO-AUTHENTICATED
+[02:32:01] [Session 5] ❌ DISCONNECTED (connection closed)
+[02:32:01] [Session 5] 🔌 CLOSED
+[02:32:24] ======================================================================
+[02:32:24] 🎮 WONDERLAND ONLINE - GAME SERVER v2
+[02:32:24] ======================================================================
+[02:32:24] Loading game data...
+[02:32:24] 
+[02:32:24] ✓ Loaded npc.dat (468.7 KB)
+[02:32:24] ✓ Loaded item.dat (1432.6 KB)
+[02:32:24] ✓ Loaded skill.dat (90.8 KB)
+[02:32:24] ✓ Loaded talk.dat (2186.6 KB)
+[02:32:24] ✓ Loaded compound.dat (10.7 KB)
+[02:32:24] ✓ Loaded compound2.dat (41.6 KB)
+[02:32:24] ✓ Loaded formula.dat (0.4 KB)
+[02:32:24] ✓ Loaded ground.mmg (15138.3 KB)
+[02:32:24] ✓ Loaded scenedata.dat (103.0 KB)
+[02:32:24] ✓ Loaded wem.mmg (269.5 KB)
+[02:32:24] ✓ Loaded mark.dat (643.2 KB)
+[02:32:24] ✓ Loaded eve.Emg (1851.2 KB)
+[02:32:24] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:32:24] 
+[02:32:24] ✅ Loaded 13 data files
+[02:32:24] ======================================================================
+[02:32:24] ✅ Listening on 0.0.0.0:6414
+[02:32:24] 📍 Serving 13 game data files
+[02:32:24] ⏱️  Client timeout: 120 seconds
+[02:32:24] ======================================================================
+[02:32:24] Waiting for connections...
+[02:32:24] ======================================================================
+[02:32:50] [Session 6] ✅ CONNECTED from 127.0.0.1:60032
+[02:32:50] [Session 6] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[02:32:50] [Session 6] ✅ AUTO-AUTHENTICATED
+[02:32:50] [Session 6] ← Y鬭
+[02:33:39] [Session 6] ❌ DISCONNECTED (connection closed)
+[02:33:39] [Session 6] 🔌 CLOSED
+[02:40:18] ======================================================================
+[02:40:18] 🎮 WONDERLAND ONLINE - GAME SERVER v2
+[02:40:18] ======================================================================
+[02:40:18] Loading game data...
+[02:40:18] 
+[02:40:18] ✓ Loaded npc.dat (468.7 KB)
+[02:40:18] ✓ Loaded item.dat (1432.6 KB)
+[02:40:18] ✓ Loaded skill.dat (90.8 KB)
+[02:40:18] ✓ Loaded talk.dat (2186.6 KB)
+[02:40:18] ✓ Loaded compound.dat (10.7 KB)
+[02:40:18] ✓ Loaded compound2.dat (41.6 KB)
+[02:40:18] ✓ Loaded formula.dat (0.4 KB)
+[02:40:18] ✓ Loaded ground.mmg (15138.3 KB)
+[02:40:18] ✓ Loaded scenedata.dat (103.0 KB)
+[02:40:18] ✓ Loaded wem.mmg (269.5 KB)
+[02:40:18] ✓ Loaded mark.dat (643.2 KB)
+[02:40:18] ✓ Loaded eve.Emg (1851.2 KB)
+[02:40:18] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:40:18] 
+[02:40:18] ✅ Loaded 13 data files
+[02:40:18] ======================================================================
+[02:40:18] ✅ Listening on 0.0.0.0:6414
+[02:40:18] 📍 Serving 13 game data files
+[02:40:18] ⏱️  Client timeout: 120 seconds
+[02:40:18] ======================================================================
+[02:40:18] Waiting for connections...
+[02:40:18] ======================================================================
+[02:45:18] ======================================================================
+[02:45:18] 🎮 WONDERLAND ONLINE - GAME SERVER v3
+[02:45:18] ======================================================================
+[02:45:18] Loading game data...
+[02:45:18] 
+[02:45:18] FATAL: name 'GameDataManager' is not defined
+[02:45:18] ======================================================================
+[02:45:18] ✅ Server stopped
+[02:45:18] ======================================================================
+[02:45:29] ======================================================================
+[02:45:29] 🎮 WONDERLAND ONLINE - GAME SERVER v3
+[02:45:29] ======================================================================
+[02:45:29] Loading game data...
+[02:45:29] 
+[02:45:29] ✓ Loaded npc.dat (468.7 KB)
+[02:45:29] ✓ Loaded item.dat (1432.6 KB)
+[02:45:29] ✓ Loaded skill.dat (90.8 KB)
+[02:45:29] ✓ Loaded talk.dat (2186.6 KB)
+[02:45:29] ✓ Loaded compound.dat (10.7 KB)
+[02:45:29] ✓ Loaded compound2.dat (41.6 KB)
+[02:45:29] ✓ Loaded formula.dat (0.4 KB)
+[02:45:29] ✓ Loaded ground.mmg (15138.3 KB)
+[02:45:29] ✓ Loaded scenedata.dat (103.0 KB)
+[02:45:29] ✓ Loaded wem.mmg (269.5 KB)
+[02:45:29] ✓ Loaded mark.dat (643.2 KB)
+[02:45:29] ✓ Loaded eve.Emg (1851.2 KB)
+[02:45:29] ✓ Loaded skilldata.mbtm (759.5 KB)
+[02:45:29] 
+[02:45:29] ✅ Loaded 13 data files
+[02:45:29] ======================================================================
+[02:45:29] ✅ Listening on 0.0.0.0:6414
+[02:45:29] 📍 Serving 13 game data files
+[02:45:29] 🔧 Protocol: WLO (0x44F4)
+[02:45:29] ⏱️  Timeout: 120 seconds
+[02:45:29] ======================================================================
+[02:45:29] Waiting for connections...
+[02:45:29] ======================================================================
+[03:00:43] [Session 7] ✅ CONNECTED from 127.0.0.1:64226
+[03:00:43] [Session 7] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[03:00:43] [Session 7] ✅ AUTO-AUTHENTICATED
+[03:00:43] [Session 7] ← Y鬭
+[03:01:30] [Session 8] ✅ CONNECTED from 127.0.0.1:56311
+[03:01:30] [Session 8] → Handshake: WLO_SERVER_V1.0_FULL_DATA
+[03:01:30] [Session 8] ✅ AUTO-AUTHENTICATED
+[03:01:30] [Session 8] ❌ DISCONNECTED (reset)
+[03:01:30] [Session 8] 🔌 CLOSED

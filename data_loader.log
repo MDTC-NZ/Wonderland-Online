@@ -1,0 +1,40 @@
+============================================================
+WONDERLAND ONLINE - GAME DATA LOADER
+============================================================
+[OK] Connected to database: C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ServerDataBase.db
+
+=== CREATING TABLES ===
+  [OK] Table 'quests' ready
+  [OK] Table 'quest_items' ready
+  [OK] Table 'items' ready
+  [OK] Table 'npcs' ready
+  [OK] Table 'skills' ready
+  [OK] Table 'recipes' ready
+  [OK] Table 'recipe_ingredients' ready
+  [OK] Table 'monsters' ready
+  [OK] Table 'maps' ready
+
+=== LOADING QUESTS ===
+[OK] Loaded 5 quests
+
+=== LOADING NPCS ===
+  [INFO] NPC.dat file size: 479964 bytes
+  [INFO] Note: NPC.dat format requires reverse engineering from game code
+[OK] Added 4 NPCs (from quest references)
+
+=== LOADING SKILLS ===
+[OK] Added 4 sample skills
+
+=== LOADING RECIPES ===
+[OK] Added 3 sample recipes
+
+=== LOADING MAPS ===
+[OK] Added 4 maps
+
+=== LOADING ITEMS ===
+[OK] Added 17 items
+
+============================================================
+[OK] DATA LOADING COMPLETE
+============================================================
+[OK] Database connection closed

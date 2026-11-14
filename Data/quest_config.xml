@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuestConfiguration>
+  <General>
+    <MaxActiveQuestsPerCharacter>20</MaxActiveQuestsPerCharacter>
+    <QuestTimeoutMinutes>0</QuestTimeoutMinutes>
+    <EnableQuestAbandon>true</EnableQuestAbandon>
+    <EnableQuestRepeat>true</EnableQuestRepeat>
+  </General>
+  
+  <Rewards>
+    <ExperienceMultiplier>1.0</ExperienceMultiplier>
+    <MoneyMultiplier>1.0</MoneyMultiplier>
+    <ReputationMultiplier>1.0</ReputationMultiplier>
+    <ItemDropRateMultiplier>1.0</ItemDropRateMultiplier>
+  </Rewards>
+  
+  <Difficulty>
+    <LevelDamageScaling>1.1</LevelDamageScaling>
+    <ObjectiveTimeoutModifier>1.0</ObjectiveTimeoutModifier>
+    <MonsterRewardScaling>1.0</MonsterRewardScaling>
+  </Difficulty>
+  
+  <SystemSettings>
+    <EnableQuestLogging>true</EnableQuestLogging>
+    <CacheQuestDefinitions>true</CacheQuestDefinitions>
+    <PreloadAllQuests>false</PreloadAllQuests>
+    <MaxCacheSize>5000</MaxCacheSize>
+  </SystemSettings>
+  
+  <Events>
+    <LogQuestStart>true</LogQuestStart>
+    <LogQuestProgress>false</LogQuestProgress>
+    <LogQuestCompletion>true</LogQuestCompletion>
+    <NotifyPlayersOnQuestCompletion>true</NotifyPlayersOnQuestCompletion>
+  </Events>
+</QuestConfiguration>

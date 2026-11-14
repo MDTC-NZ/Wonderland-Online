@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Quests>
+  <!-- Tutorial Quest -->
+  <Quest>
+    <QuestID>1</QuestID>
+    <QuestName>First Steps</QuestName>
+    <Description>Talk to the village elder to begin your adventure</Description>
+    <Level>1</Level>
+    <RequiredLevel>1</RequiredLevel>
+    <StartNpcID>100</StartNpcID>
+    <EndNpcID>100</EndNpcID>
+    <ObjectiveCount>1</ObjectiveCount>
+    <ObjectiveType>TalkToNpc</ObjectiveType>
+    <ObjectiveTargetID>100</ObjectiveTargetID>
+    <RewardEXP>100</RewardEXP>
+    <RewardMoney>50</RewardMoney>
+    <IsRepeatable>false</IsRepeatable>
+    <TimeLimit>0</TimeLimit>
+    <Prerequisites>
+    </Prerequisites>
+    <ItemRewards>
+      <Item>
+        <ItemID>5001</ItemID>
+        <Quantity>1</Quantity>
+        <IsChoice>false</IsChoice>
+      </Item>
+    </ItemRewards>
+    <SkillRewards>
+    </SkillRewards>
+  </Quest>
+
+  <!-- Collection Quest -->
+  <Quest>
+    <QuestID>2</QuestID>
+    <QuestName>Collect Herbs</QuestName>
+    <Description>Gather 10 healing herbs for the herbalist</Description>
+    <Level>5</Level>
+    <RequiredLevel>5</RequiredLevel>
+    <StartNpcID>101</StartNpcID>
+    <EndNpcID>101</EndNpcID>
+    <ObjectiveCount>10</ObjectiveCount>
+    <ObjectiveType>CollectItem</ObjectiveType>
+    <ObjectiveTargetID>5001</ObjectiveTargetID>
+    <RewardEXP>500</RewardEXP>
+    <RewardMoney>200</RewardMoney>
+    <IsRepeatable>false</IsRepeatable>
+    <TimeLimit>0</TimeLimit>
+    <Prerequisites>
+      <Quest>1</Quest>
+    </Prerequisites>
+    <ItemRewards>
+      <Item>
+        <ItemID>2001</ItemID>
+        <Quantity>1</Quantity>
+        <IsChoice>false</IsChoice>
+      </Item>
+    </ItemRewards>
+    <SkillRewards>
+    </SkillRewards>
+  </Quest>
+
+  <!-- Hunting Quest (Repeatable) -->
+  <Quest>
+    <QuestID>3</QuestID>
+    <QuestName>Defeat Slimes</QuestName>
+    <Description>Defeat 5 slimes terrorizing the village</Description>
+    <Level>3</Level>
+    <RequiredLevel>1</RequiredLevel>
+    <StartNpcID>100</StartNpcID>
+    <EndNpcID>100</EndNpcID>
+    <ObjectiveCount>5</ObjectiveCount>
+    <ObjectiveType>KillMob</ObjectiveType>
+    <ObjectiveTargetID>1001</ObjectiveTargetID>
+    <RewardEXP>300</RewardEXP>
+    <RewardMoney>150</RewardMoney>
+    <IsRepeatable>true</IsRepeatable>
+    <TimeLimit>24</TimeLimit>
+    <Prerequisites>
+    </Prerequisites>
+    <ItemRewards>
+      <Item>
+        <ItemID>2002</ItemID>
+        <Quantity>2</Quantity>
+        <IsChoice>false</IsChoice>
+      </Item>
+    </ItemRewards>
+    <SkillRewards>
+    </SkillRewards>
+  </Quest>
+
+  <!-- Delivery Quest with Choice Reward -->
+  <Quest>
+    <QuestID>4</QuestID>
+    <QuestName>Deliver Package</QuestName>
+    <Description>Deliver the merchant package to the next town</Description>
+    <Level>10</Level>
+    <RequiredLevel>10</RequiredLevel>
+    <StartNpcID>102</StartNpcID>
+    <EndNpcID>103</EndNpcID>
+    <ObjectiveCount>1</ObjectiveCount>
+    <ObjectiveType>DeliverItem</ObjectiveType>
+    <ObjectiveTargetID>5002</ObjectiveTargetID>
+    <RewardEXP>1000</RewardEXP>
+    <RewardMoney>500</RewardMoney>
+    <IsRepeatable>false</IsRepeatable>
+    <TimeLimit>48</TimeLimit>
+    <Prerequisites>
+      <Quest>3</Quest>
+    </Prerequisites>
+    <ItemRewards>
+      <Item>
+        <ItemID>2003</ItemID>
+        <Quantity>1</Quantity>
+        <IsChoice>false</IsChoice>
+      </Item>
+      <Item>
+        <ItemID>2004</ItemID>
+        <Quantity>1</Quantity>
+        <IsChoice>true</IsChoice>
+      </Item>
+    </ItemRewards>
+    <SkillRewards>
+    </SkillRewards>
+  </Quest>
+
+  <!-- Multi-stage Complex Quest -->
+  <Quest>
+    <QuestID>5</QuestID>
+    <QuestName>The Lost Artifact</QuestName>
+    <Description>Find the three pieces of the lost artifact hidden across the realm</Description>
+    <Level>20</Level>
+    <RequiredLevel>15</RequiredLevel>
+    <StartNpcID>104</StartNpcID>
+    <EndNpcID>104</EndNpcID>
+    <ObjectiveCount>3</ObjectiveCount>
+    <ObjectiveType>CollectItem</ObjectiveType>
+    <ObjectiveTargetID>5003</ObjectiveTargetID>
+    <RewardEXP>2000</RewardEXP>
+    <RewardMoney>1000</RewardMoney>
+    <IsRepeatable>false</IsRepeatable>
+    <TimeLimit>0</TimeLimit>
+    <Prerequisites>
+      <Quest>2</Quest>
+    </Prerequisites>
+    <ItemRewards>
+      <Item>
+        <ItemID>3001</ItemID>
+        <Quantity>1</Quantity>
+        <IsChoice>false</IsChoice>
+      </Item>
+    </ItemRewards>
+    <SkillRewards>
+      <Skill>1001</Skill>
+    </SkillRewards>
+  </Quest>
+</Quests>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ShopConfiguration>
+  <General>
+    <DefaultBuyMultiplier>1.0</DefaultBuyMultiplier>
+    <DefaultSellMultiplier>0.8</DefaultSellMultiplier>
+    <MaxShopInventorySlots>100</MaxShopInventorySlots>
+    <EnableRestocking>true</EnableRestocking>
+    <DefaultRestockIntervalHours>24</DefaultRestockIntervalHours>
+  </General>
+  
+  <PricingRules>
+    <PlayerLevelPriceAdjustment>0.05</PlayerLevelPriceAdjustment>
+    <ItemRarityMarkup>
+      <Common>1.0</Common>
+      <Uncommon>1.2</Uncommon>
+      <Rare>1.5</Rare>
+      <Epic>2.0</Epic>
+      <Legendary>3.0</Legendary>
+    </ItemRarityMarkup>
+  </PricingRules>
+  
+  <Inventory>
+    <MinStockLevel>10</MinStockLevel>
+    <MaxStockLevel>100</MaxStockLevel>
+    <RestockQuantity>50</RestockQuantity>
+    <LimitedStockEnabled>true</LimitedStockEnabled>
+  </Inventory>
+  
+  <Transactions>
+    <LogAllTransactions>true</LogAllTransactions>
+    <MaxTransactionAmount>999999</MaxTransactionAmount>
+    <EnableTransactionReceipt>true</EnableTransactionReceipt>
+    <ArchiveTransactionsAfterDays>30</ArchiveTransactionsAfterDays>
+  </Transactions>
+  
+  <SystemSettings>
+    <EnablePriceHistory>true</EnablePriceHistory>
+    <CacheShopsInMemory>true</CacheShopsInMemory>
+    <MaxCachedShops>500</MaxCachedShops>
+  </SystemSettings>
+</ShopConfiguration>

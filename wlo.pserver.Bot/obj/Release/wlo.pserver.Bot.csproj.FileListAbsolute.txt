@@ -1,0 +1,13 @@
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\wlo.pserver.Bot.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\wlo.pserver.Bot.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\mscorlib.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\normidna.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\normnfc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\normnfd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\normnfkc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\Release\normnfkd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegistration\wlo.pserver.Bot.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegistration\wlo.pserver.Bot.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.csprojResolveAssemblyReference.cache
