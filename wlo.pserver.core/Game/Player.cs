@@ -93,25 +93,7 @@ using Game.Maps;
             public Player(SocketClient src,DataFiles.PhxItemDat itemdat)
                 : base(src.SendPacket,itemdat)
             {
-                m_socket = src;
-                m_socket.onConnectionLost += m_socket_onConnectionLost;
-                m_socket.onPacketRecved = ProcessSocket;
-                QueueData = new Queue<SendPacket>(25);
-
-                
-                m_inv = new Inventory(this,itemdat);
-                onWearEquip = m_inv.onWearEquip;
-                onEquip_Remove = m_inv.onUnEquip;
-                m_tent = new Tent(this);
-                m_questManager = new QuestManager(this);
-
-                m_useracc = new User();
-                Flags = new PlayerFlagManager();
-                m_settings = new ClientSettings();
-                //m_friendlist = new Friendlist(new Action<SendPacket>(SendPacket));
-                //m_Mail = new MailManager(this);
-                
-                //m_petlist = new PetList(this);
+                InitializePlayer(src, itemdat);
 
                 while (m_socket.m_IncomingPackets.Count > 0)
                 {
@@ -123,6 +105,33 @@ using Game.Maps;
 
 
             }
+
+            internal Player(DataFiles.PhxItemDat itemdat)
+                : base(delegate(IPacket packet) { }, itemdat)
+            {
+                InitializePlayer(null, itemdat);
+            }
+
+            void InitializePlayer(SocketClient src, DataFiles.PhxItemDat itemdat)
+            {
+                m_socket = src;
+                if (m_socket != null)
+                {
+                    m_socket.onConnectionLost += m_socket_onConnectionLost;
+                    m_socket.onPacketRecved = ProcessSocket;
+                }
+
+                QueueData = new Queue<SendPacket>(25);
+                m_inv = new Inventory(this, itemdat);
+                onWearEquip = m_inv.onWearEquip;
+                onEquip_Remove = m_inv.onUnEquip;
+                m_tent = new Tent(this);
+                m_questManager = new QuestManager(this);
+                m_useracc = new User();
+                Flags = new PlayerFlagManager();
+                m_settings = new ClientSettings();
+            }
+
             ~Player()
             {
             }
@@ -153,7 +162,7 @@ using Game.Maps;
 
             #region User Account
             public User UserAcc { get { return m_useracc; } }
-            //public bool GM { get { return m_gmlvl > 0; } }
+            public bool GM { get { return m_useracc != null && m_useracc.GMlvl > 0; } }
             //public bool Busy { get; set; }
             #endregion
 

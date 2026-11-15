@@ -18,6 +18,7 @@ namespace Server
     public class LoginServer : RCLibrary.Core.Networking.TcpServer
     {
         private TcpListener listener;
+        volatile bool isListening;
 
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace Server
 
 
         public int Count { get { return ClientList.Count; } }
+        public bool IsListening { get { return isListening; } }
 
 
         public override void ListenThread()
@@ -50,6 +52,7 @@ namespace Server
                 m_Socket.Blocking = true;
                 DebugSystem.Write("Server bound to port " + 6414 + " successfully.");
                 m_Socket.Listen(40);
+                isListening = true;
                 DebugSystem.Write("Now listening for clients on Port " + 6414 + ".");
                 while (bKeepAlive && m_ThreadHandle.ThreadState != ThreadState.AbortRequested)
                 {
@@ -106,6 +109,7 @@ namespace Server
             }
 
             bKeepAlive = false;
+            isListening = false;
             try
             {
                 m_Socket.Shutdown(SocketShutdown.Both);

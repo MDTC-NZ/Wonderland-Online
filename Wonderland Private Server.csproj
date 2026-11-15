@@ -159,6 +159,9 @@
     <Compile Include="Src\Server\Utilities\Request\RequestManager.cs" />
     <Compile Include="Src\Server\Utilities\Request\requests.cs" />
     <Compile Include="Src\Server\WorldServer.cs" />
+    <Compile Include="Src\DataFiles\EveExt.cs" />
+    <Compile Include="Src\DataFiles\EveLoader.cs" />
+    <Compile Include="Src\DataFiles\SceneLoader.cs" />
     <Compile Include="Tutorials\Creating Dll for Database Connection.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -229,6 +232,28 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Web\register.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\dashboard.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\dashboard.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\dashboard.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\config.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\test.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="gamedata\eve.Emg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ClientUpdates\manifest.json">
+      <Link>ClientUpdates\manifest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Tutorials\x64\SQLite.Interop.dll" />

@@ -10,25 +10,16 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Entit
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\EntityFramework.SqlServer.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\GupdtSrv.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\log4net.dll
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\mscorlib.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\MySql.Data.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Octokit.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\PhoenixData.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\RCLibrary.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\System.Data.SQLite.dll
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\System.Data.SQLite.EF6.dll
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\System.Data.SQLite.Linq.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\wlo.pserver.core.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\wlo.pserver.core.pdb
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\EntityFramework.xml
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\log4net.xml
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\normidna.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\normnfc.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\normnfd.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\normnfkc.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\normnfkd.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csprojResolveAssemblyReference.cache
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland_Private_Server.Properties.Resources.resources
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland_Private_Server.Form1.resources
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland_Private_Server.UI.ShutDown_Dialog.resources
@@ -66,3 +57,78 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegist
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegistration\normnfd.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegistration\normnfkc.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseRegistration\normnfkd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\dashboard.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\dashboard.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\dashboard.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\config.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\test.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\gamedata\eve.Emg
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\ClientUpdates\manifest.json
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\register.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\register.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\register.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\dashboard.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\dashboard.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\dashboard.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\config.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Web\test.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\gamedata\eve.Emg
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\ClientUpdates\manifest.json
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\x86\SQLite.Interop.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Data\ServerDataBase.db.temp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Wonderland Private Server.exe.config
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Wonderland Private Server.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Wonderland Private Server.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\EntityFramework.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\EntityFramework.SqlServer.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\GupdtSrv.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\log4net.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\mscorlib.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\MySql.Data.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\Octokit.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\PhoenixData.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\RCLibrary.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\System.Data.SQLite.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\wlo.pserver.core.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\wlo.pserver.core.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\EntityFramework.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\EntityFramework.SqlServer.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\log4net.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normidna.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfkc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfkd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.AssemblyReference.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.CoreCompileInputs.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\wlo.pserver.core.dll.config
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\dashboard.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\dashboard.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\dashboard.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\config.js
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\test.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\gamedata\eve.Emg
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\ClientUpdates\manifest.json
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\x86\SQLite.Interop.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Data\ServerDataBase.db.temp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Wonderland Private Server.exe.config
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Wonderland Private Server.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Wonderland Private Server.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.SqlServer.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\GupdtSrv.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\log4net.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\MySql.Data.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Octokit.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\PhoenixData.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\RCLibrary.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\System.Data.SQLite.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\wlo.pserver.core.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\wlo.pserver.core.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.SqlServer.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\log4net.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderla.9E251513.Up2Date

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,11 @@ namespace Network.ActionCodes
 
         public override void ProcessPkt(Player p,  RecievePacket r)
         {
-            switch (r.Unpack8())
+            byte subAction = r.Unpack8();
+            if (subAction == 4)
+                DebugSystem.Write(string.Format("[Login] Received AC63 login packet ({0} bytes).", r.Buffer.Length));
+
+            switch (subAction)
             {
                 case 0:
                 //case 3: Recv3(ref p, r); break;
@@ -50,7 +55,10 @@ namespace Network.ActionCodes
 
                 p.Slot = charNum;
 
-                if (!cGlobal.gCharacterDataBase.GetCharacterData( (p.Slot == 1)?p.UserAcc.Character1ID:p.UserAcc.Character2ID,ref p)) // char is not created
+                uint selectedCharacterID = (p.Slot == 1) ? p.UserAcc.Character1ID : p.UserAcc.Character2ID;
+                cGlobal.gUserDataBase.ProcessMallDeliveries(selectedCharacterID, cGlobal.ItemDatManager);
+
+                if (!cGlobal.gCharacterDataBase.GetCharacterData(selectedCharacterID,ref p)) // char is not created
                 {
                     #region Create Character
                     //cGlobal.gUserDataBase.Update_Player_ID(p.UserAcc.DataBaseID, p.CharID, charNum);
@@ -86,9 +94,10 @@ namespace Network.ActionCodes
         /// <param name="r"></param>
         void Recv4(ref Player p, RecievePacket r)
         {
+            Stopwatch loginTimer = Stopwatch.StartNew();
             try
             {
-                int loginState = 0; //0-good login  1-bad un/pw  2-dup log 3-wrong version 4-need update
+                int loginState = 0; //0-good login  1-bad un/pw  2-dup log 4-invalid login code
 
                 //sending username and password
                 string name = r.UnpackString();
@@ -101,10 +110,17 @@ namespace Network.ActionCodes
                 byte lcLen = r.Unpack8();
                 byte key = r.Unpack8();
                 char[] lCode = new char[20];
-                Array.Copy(r.Buffer, r.GetPtr(), lCode, 0, lcLen);
-                for (int n = 0; n < lcLen; n++)
-                    lCode[n] = (char)((byte)lCode[n] ^ (byte)key);
-                r.SetPtr((int)(r.GetPtr() + lcLen));
+                int loginCodeOffset = r.GetPtr();
+                bool loginCodeValid = lcLen <= lCode.Length && loginCodeOffset + lcLen <= r.Buffer.Length;
+                if (loginCodeValid)
+                {
+                    Array.Copy(r.Buffer, loginCodeOffset, lCode, 0, lcLen);
+                    for (int n = 0; n < lcLen; n++)
+                        lCode[n] = (char)((byte)lCode[n] ^ (byte)key);
+                    r.SetPtr(loginCodeOffset + lcLen);
+                }
+                DebugSystem.Write(string.Format("[Login] Client version={0}, login-code length={1}, code payload valid={2}.",
+                    version, lcLen, loginCodeValid));
 
                 if ((name.Length < 4) || (name.Length > 14))
                 {
@@ -114,11 +130,7 @@ namespace Network.ActionCodes
                 {
                     loginState = 1;
                 }
-                else if (version < 1096)//bad aloign version
-                {
-                    loginState = 3;
-                }
-                else if ((lcLen < 2) || (lcLen > 15))//bad login code length
+                else if (!loginCodeValid)
                 {
                     loginState = 4;
                 }
@@ -144,6 +156,9 @@ namespace Network.ActionCodes
                                 p.UserAcc.UserName = userdata[0];
                                 p.UserAcc.Cipher = userdata[1];
                                 p.UserAcc.IM = int.Parse(userdata[2]);
+                                int gmLevel;
+                                if (userdata.Length > 3 && int.TryParse(userdata[3], out gmLevel))
+                                    p.UserAcc.GMlvl = gmLevel;
                             }
                             else
                                 loginState = 1;
@@ -161,6 +176,8 @@ namespace Network.ActionCodes
 
                 #region Result of Login State
                 // here we do the results of loginstate
+                DebugSystem.Write(string.Format("[Login] Account validation completed in {0} ms with result {1}.",
+                    loginTimer.ElapsedMilliseconds, loginState));
                 switch (loginState)
                 {
                     case 0:
@@ -174,8 +191,11 @@ namespace Network.ActionCodes
                             tmp = new SendPacket();
                             tmp.Pack8(63);
                             tmp.Pack8(1);
+                            Stopwatch characterTimer = Stopwatch.StartNew();
                             Character char1 = cGlobal.gCharacterDataBase.GetCharacterData(p.UserAcc.Character1ID, p.UserAcc.DataBaseID + 10000);
                             Character char2 = cGlobal.gCharacterDataBase.GetCharacterData(p.UserAcc.Character2ID, p.UserAcc.DataBaseID + 10000);
+                            DebugSystem.Write(string.Format("[Login] Character slots loaded in {0} ms (slot1={1}, slot2={2}).",
+                                characterTimer.ElapsedMilliseconds, char1 != null, char2 != null));
                             
                             // Always pack both slots - client expects fixed format
                             if (char1 != null)
@@ -205,13 +225,6 @@ namespace Network.ActionCodes
                             p.Send( Tools.FromFormat("bb", 63, 2));
                             p.Send( Tools.FromFormat("bb", 0, 19));
                             cGlobal.gLoginServer.Disconnect(p.UserAcc.UserID);
-                        } break;
-                    case 3:
-                        {
-                            SendPacket sp = new SendPacket();// PSENDPACKET PackSend = new SENDPACKET;
-                            //PackSend->Clear();
-                            p.Send( Tools.FromFormat("bb", 0, 17));
-                            p.Send(sp);
                         } break;
                     case 4:
                         {

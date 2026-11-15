@@ -230,7 +230,7 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
             catch (Exception e)
             {
                 DebugSystem.Write("failed");
-                DebugSystem.Write(e);
+                DebugSystem.Write(e.ToString());
                 return false;
             }
         }
@@ -279,7 +279,7 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
             }
             catch { }
 
-            if (!bFound) { DebugSystem.Write(new Exception( "Scene => " + SceneID.ToString() + " could not be found.")); }
+            if (!bFound) { DebugSystem.Write("Scene => " + SceneID.ToString() + " could not be found."); }
 
             return RetVal;
         }
@@ -301,7 +301,7 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
                     }
                 }
             }
-            if (!bFound) { DebugSystem.Write(new Exception("Scene => " + SceneName + " could not be found.")); }
+            if (!bFound) { DebugSystem.Write("Scene => " + SceneName + " could not be found."); }
 
             return RetVal;
         }

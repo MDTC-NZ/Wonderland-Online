@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Create an account for the Wonderland Online private server.">
-    <title>Wonderland Online - Registration</title>
+    <title>Wonderland Online - Server Status and Registration</title>
     <link rel="stylesheet" href="/register.css">
     <script src="/config.js"></script>
     <script src="/register.js" defer></script>
@@ -21,6 +21,46 @@
             <h1 class="logo">✨ Wonderland Online ✨</h1>
             <p class="tagline">Join the Adventure!</p>
         </header>
+
+        <section class="public-hub" aria-labelledby="server-overview-title">
+            <div class="public-hub-heading">
+                <div>
+                    <h2 id="server-overview-title">Server status</h2>
+                    <p>Live status refreshes automatically.</p>
+                </div>
+                <span id="publicServerStatus" class="public-status-badge" role="status" aria-live="polite">Checking…</span>
+            </div>
+            <div class="public-status-grid">
+                <div class="public-status-card">
+                    <span>Game servers online</span>
+                    <strong id="publicServerCount">—</strong>
+                </div>
+                <div class="public-status-card">
+                    <span>Players online</span>
+                    <strong id="publicPlayerCount">—</strong>
+                </div>
+                <div class="public-status-card">
+                    <span>Game connection</span>
+                    <strong id="publicGameAddress">—</strong>
+                </div>
+            </div>
+            <p id="publicStatusChecked" class="public-status-updated">Getting current status…</p>
+
+            <div class="public-download-grid">
+                <article class="public-download-card">
+                    <h3>Download the game</h3>
+                    <p id="clientDownloadHint">The game-client download link has not been configured by the server administrator.</p>
+                    <a id="clientDownloadLink" class="btn btn-primary" href="#" hidden>Download game client</a>
+                </article>
+                <article class="public-download-card">
+                    <h3>Launcher and latest updates</h3>
+                    <p id="latestUpdateSummary" role="status" aria-live="polite">Checking for updates…</p>
+                    <a class="btn btn-primary" href="/downloads/WloClientUpdater.exe">Download update launcher</a>
+                    <a class="manifest-link" href="/client-updates/manifest.json">View update manifest</a>
+                    <ul id="latestUpdateFiles" class="latest-update-files"></ul>
+                </article>
+            </div>
+        </section>
 
         <!-- Tab Navigation -->
         <div class="tabs">
@@ -193,7 +233,7 @@
                     <h3>🎮 Game Server Connection</h3>
                     <div class="info-box">
                         <p><strong>Server Address:</strong> wlo.kiaoragaming.xyz</p>
-                        <p><strong>Port:</strong> 7777</p>
+                        <p><strong>Port:</strong> 6414</p>
                         <p><strong>Username:</strong> Your account username</p>
                         <p><strong>Password:</strong> Your account password</p>
                     </div>

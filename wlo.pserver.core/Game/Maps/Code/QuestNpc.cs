@@ -47,7 +47,7 @@ namespace Game.Maps
                     if (quest != null)
                     {
                         // Show quest indicator if player hasn't done it and meets requirements
-                        if (!src.QuestMgr.IsQuestCompleted(questID))
+                        if (!src.Quests.IsQuestCompleted(questID))
                         {
                             if (src.Level >= quest.RequiredLevel)
                             {
@@ -61,7 +61,7 @@ namespace Game.Maps
                 // Check if this NPC can receive quests from player
                 foreach (int questID in ReceivesQuests)
                 {
-                    Quest active = src.QuestMgr.GetActiveQuest(questID);
+                    Quest active = src.Quests.GetActiveQuest(questID);
                     if (active != null && active.IsCompleted)
                     {
                         // Send quest completion indicator to player
@@ -115,7 +115,7 @@ namespace Game.Maps
                 return false;
             }
 
-            if (src.QuestMgr.AcceptQuest(questID))
+            if (src.Quests.AcceptQuest(questID))
             {
                 log.Info($"Player {src.CharID} accepted quest {questID} from NPC {NpcID}");
                 ShowQuestDialog(src, questID, QuestDialogType.Accepted);
@@ -135,7 +135,7 @@ namespace Game.Maps
                 return false;
             }
 
-            if (src.QuestMgr.CompleteQuest(questID))
+            if (src.Quests.CompleteQuest(questID))
             {
                 log.Info($"Player {src.CharID} completed quest {questID} with NPC {NpcID}");
                 ShowQuestDialog(src, questID, QuestDialogType.Completed);

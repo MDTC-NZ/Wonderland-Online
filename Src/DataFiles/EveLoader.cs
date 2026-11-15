@@ -22,7 +22,7 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
             byte[] data = File.ReadAllBytes(filename);
             eveData = data;
             try { ReadData(data); }
-            catch (Exception e) { DebugSystem.Write(e); return false; }
+            catch (Exception e) { DebugSystem.Write(e.ToString()); return false; }
             DebugSystem.Write("done loading Eve");
             return true;
         }
@@ -36,6 +36,34 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
         public MapData GetMapData(ushort ID)
         {
             return Maps[ID];
+        }
+
+        public bool TryGetMapData(ushort ID, out MapData mapData)
+        {
+            return Maps.TryGetValue(ID, out mapData);
+        }
+
+        public IEnumerable<ushort> MapIDs
+        {
+            get { return Maps.Keys.OrderBy(id => id).ToArray(); }
+        }
+
+        public string GetMapName(ushort ID)
+        {
+            MapData mapData;
+            if (Maps.TryGetValue(ID, out mapData))
+            {
+                SceneInfo scene = SceneDataFile.m_List.FirstOrDefault(item => item.SceneID == mapData.sceneID);
+                if (scene.SceneName != null && !string.IsNullOrWhiteSpace(scene.Name))
+                    return scene.Name;
+            }
+
+            return "Map " + ID;
+        }
+
+        public int MapCount
+        {
+            get { return Maps.Count; }
         }
 
         void ReadData(byte[] d)
@@ -57,42 +85,6 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
             //since we have the offest values we will go straight to it to pull certain data
             //tricky as hell i kno
             Load_FinalData();
-
-            List<KeyValuePair<byte,string>> str = new List<KeyValuePair<byte,string>>();
-            List<KeyValuePair<byte, string>> str2 = new List<KeyValuePair<byte, string>>();
-            List<byte> src = new List<byte>();
-            List<byte> src2 = new List<byte>();
-
-            foreach (var m in Maps.Values)
-            {
-                    foreach (var o in m.Npclist)
-                    {
-                        if (!src.Contains(o.unknownbyte4))
-                            src.Add(o.unknownbyte4);
-                        if (!src2.Contains(o.unknownbyte5))
-                            src2.Add(o.unknownbyte5);
-                        var npc = cGlobal.gNpcManager.GetNpc((ushort)o.npcId);
-                        var item = cGlobal.gItemManager.GetItem((ushort)o.npcId);
-                        str.Add(new KeyValuePair<byte, string>(o.unknownbyte4, string.Format("Name {0} ID {1} Map {2} Has Walk {3} HasExt Walk {4}",(npc != null)?npc.NpcName:(item != null)?item.Name:"Unknown", o.npcId,m.mapID,(o.walksteps.Count > 0),(o.walkpatterns.Count>0))));
-                        str2.Add(new KeyValuePair<byte, string>(o.unknownbyte5, string.Format("Name {0} ID {1} Map {2} Has Walk {3} HasExt Walk {4}", (npc != null) ? npc.NpcName : (item != null) ? item.Name : "Unknown", o.npcId, m.mapID, (o.walksteps.Count > 0), (o.walkpatterns.Count > 0))));
-                    }
-            }
-            
-            foreach (var r in src)
-            {
-                var file = File.CreateText(r + ".txt");
-                foreach(var t in str.Where(c=>c.Key == r))
-                    file.WriteLine(t.Value);
-                file.Close();
-            }
-            foreach (var r in src2)
-            {
-                var file = File.CreateText("U"+r + ".txt");
-                foreach (var t in str.Where(c => c.Key == r))
-                    file.WriteLine(t.Value);
-                file.Close();
-            }
-
         }
         void Load_MapEntries(ref int ptr, byte[] d, uint len)
         {
@@ -206,7 +198,7 @@ namespace Wonderland_Private_Server.DataManagement.DataFiles
                     Maps[r.mapID].PreEvents = LoadpreEventEntries(r);
                     Maps[r.mapID].ExtBattleInfo = LoadBattleEntries(r);
                 }
-                catch (Exception e) { DebugSystem.Write(e); }
+                catch (Exception e) { DebugSystem.Write(e.ToString()); }
             }
 
             DebugSystem.Write("Operation took-> " + timer.Elapsed.ToString());

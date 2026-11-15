@@ -1,37 +1,35 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
-    ".NETFramework,Version=v4.6.2": {}
+    "net462": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.6.2": []
+    "net462": [
+      "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.3"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Muhammet\\.nuget\\packages\\": {}
+    "C:\\Users\\hayde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Wlo.Core\\Wlo.Core.csproj",
+      "projectUniqueName": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\Wlo.Core.csproj",
       "projectName": "Wlo.Core",
-      "projectPath": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Wlo.Core\\Wlo.Core.csproj",
-      "packagesPath": "C:\\Users\\Muhammet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Wlo.Core\\obj\\",
+      "projectPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\Wlo.Core.csproj",
+      "packagesPath": "C:\\Users\\hayde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Muhammet\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\hayde\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net462"
       ],
-      "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "net462": {
+          "framework": "net462",
           "targetAlias": "net462",
           "projectReferences": {}
         }
@@ -46,13 +44,33 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "11.0.100"
     },
     "frameworks": {
       "net462": {
+        "framework": "net462",
         "targetAlias": "net462",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\RuntimeIdentifierGraph.json"
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.0.3, )",
+            "autoReferenced": true
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Microsoft.NETFramework.ReferenceAssemblies (>= 1.0.3)' for 'net462'.",
+      "libraryId": "Microsoft.NETFramework.ReferenceAssemblies",
+      "targetGraphs": [
+        "net462"
+      ]
+    }
+  ]
 }

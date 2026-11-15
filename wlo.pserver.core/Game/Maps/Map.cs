@@ -59,6 +59,17 @@ namespace Game
             Destinations = new Dictionary<byte, WarpDest>();
             Portals = new Dictionary<byte, WarpPortal>();
         }
+
+        public GameMap(Plugin.PluginHost host, uint mapID, string mapName)
+            : this()
+        {
+            if (host == null)
+                throw new ArgumentNullException("host");
+            myhost = host;
+            MapID = mapID;
+            m_name = mapName;
+        }
+
         public GameMap(Plugin.PluginHost host, System.IO.FileInfo src)
             : base(src)
         {
@@ -75,6 +86,12 @@ namespace Game
 
             LoadData();
 
+        }
+
+        public Player[] GetPlayers()
+        {
+            lock (mlock)
+                return m_playerlist.ToArray();
         }
 
 
@@ -155,8 +172,39 @@ namespace Game
         #region Properties
         public virtual MapType Type { get { return MapType.RegularMap; } }
         public virtual uint MapID { get { lock (mlock) return m_mapid; } set { lock (mlock)m_mapid = value; } }
-        public virtual string MapName { get { return ""; } }
+        public virtual string MapName { get { return m_name ?? ""; } }
         #endregion
+
+        public void AddWarp(byte portalID, ushort destinationMap, ushort destinationX, ushort destinationY)
+        {
+            WarpDest destination = new WarpDest
+            {
+                clickID = portalID,
+                DstID = destinationMap,
+                DstX = destinationX,
+                DstY = destinationY
+            };
+            Destinations[portalID] = destination;
+
+            RuntimeWarpPortal portal = new RuntimeWarpPortal(portalID);
+            portal.DstID = portalID;
+            Portals[portalID] = portal;
+        }
+
+        sealed class RuntimeWarpPortal : WarpPortal
+        {
+            readonly ushort portalID;
+
+            public RuntimeWarpPortal(byte portalID)
+            {
+                this.portalID = portalID;
+            }
+
+            public override ushort CickID
+            {
+                get { return portalID; }
+            }
+        }
 
         public void Dispose()
         {
@@ -203,7 +251,8 @@ namespace Game
             while (DisconnectedQueue.Count > 0)
             {
                 var p = DisconnectedQueue.Dequeue();
-                m_playerlist.Remove(p);
+                lock (mlock)
+                    m_playerlist.Remove(p);
             }
         }
 
@@ -294,15 +343,18 @@ namespace Game
             src.CurX = from.DstX_Axis;//switch x
             src.CurY = from.DstY_Axis;//switch y
 
-            if (!m_playerlist.Contains(src))
-                m_playerlist.Add(src);
+            lock (mlock)
+            {
+                if (!m_playerlist.Contains(src))
+                    m_playerlist.Add(src);
+            }
 
             if (teletype != TeleportType.Login)
             {
                 SendAc12(src, portalID, from);
             }
 
-            foreach (var r in m_playerlist)
+            foreach (var r in GetPlayers())
             {
                 if (r != src)
                 {
@@ -358,6 +410,7 @@ namespace Game
             src.PrevMap.DstY_Axis = src.CurY;
 
             SendAc12(src, portalID, To, toTent);
+            lock (mlock)
                 m_playerlist.Remove(src);
         }
 
@@ -528,7 +581,7 @@ namespace Game
                 //SendOpenTents(t);
 
 
-                foreach (var r in m_playerlist)
+                foreach (var r in GetPlayers())
                 {
                     tmp.Add(Tools.FromFormat("bbd", 23, 122, r.CharID));
                     tmp.Add(Tools.FromFormat("bbdb", 10, 3, r.CharID, 255));
@@ -698,11 +751,12 @@ namespace Game
         /// <param name="To">"Multiple target IDs as string to send to specific people"</param>
         public void Broadcast(SendPacket pkt, string parameter, params object[] To)
         {
+                Player[] players = GetPlayers();
                 switch (parameter)
                 {
-                    case "ALL": m_playerlist.ForEach(c => c.Send(pkt)); break;
-                    case "Ex": m_playerlist.Where(c => To.Count(d => Convert.ToUInt32(d) == c.CharID) == 0).ToList().ForEach(c => c.Send(pkt)); break;
-                    case "To": m_playerlist.Where(c => To.Count(d => Convert.ToUInt32(d) == c.CharID) > 0).ToList().ForEach(c => c.Send(pkt)); break;
+                    case "ALL": foreach (Player player in players) player.Send(pkt); break;
+                    case "Ex": foreach (Player player in players.Where(c => To.Count(d => Convert.ToUInt32(d) == c.CharID) == 0)) player.Send(pkt); break;
+                    case "To": foreach (Player player in players.Where(c => To.Count(d => Convert.ToUInt32(d) == c.CharID) > 0)) player.Send(pkt); break;
                 }
         }
 

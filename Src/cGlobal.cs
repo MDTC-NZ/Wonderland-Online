@@ -26,6 +26,7 @@ namespace System
         public static DataBase.CharacterDataBase gCharacterDataBase;
         public static DataBase.UserDataBase gUserDataBase;
         public static DataBase.GameDataBase gGameDataBase;
+        public static Wonderland_Private_Server.DataManagement.DataFiles.EveManager gEveManager;
 
         public static DataFiles.PhxItemDat ItemDatManager;
 

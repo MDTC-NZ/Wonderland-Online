@@ -107,12 +107,10 @@ public class PhxItemDat : IDataManager
 
 	public List<PhxItemInfo> GetItemList()
 	{
-		List<PhxItemInfo> result = new List<PhxItemInfo>();
 		lock (m_Lock)
 		{
-			result = m_List;
+			return new List<PhxItemInfo>(m_List);
 		}
-		return result;
 	}
 
 	public Task<bool> Load(string file)

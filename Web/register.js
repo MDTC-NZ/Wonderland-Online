@@ -20,6 +20,110 @@
     const forgotStep2 = document.getElementById("forgot-step-2");
     const forgotBtnText = document.getElementById("forgot-btn-text");
 
+    function initializePublicPortal() {
+        const statusBadge = document.getElementById("publicServerStatus");
+        if (!statusBadge) return;
+
+        const configuredDownloadUrl = typeof CONFIG !== "undefined" ? CONFIG.clientDownloadUrl : "";
+        const downloadLink = document.getElementById("clientDownloadLink");
+        const downloadHint = document.getElementById("clientDownloadHint");
+        if (configuredDownloadUrl) {
+            try {
+                const url = new URL(configuredDownloadUrl, window.location.origin);
+                if (url.protocol === "https:" || url.origin === window.location.origin) {
+                    downloadLink.href = url.href;
+                    downloadLink.hidden = false;
+                    downloadHint.textContent = "Download the authorized game client, then use the update launcher to install the latest server patch.";
+                } else {
+                    downloadHint.textContent = "The configured game-client download is not secure. Please contact the server administrator.";
+                }
+            } catch (error) {
+                downloadHint.textContent = "The configured game-client download link is invalid. Please contact the server administrator.";
+            }
+        }
+
+        function refreshServerStatus() {
+            const apiBase = (typeof CONFIG !== "undefined" && CONFIG.getApiBase) ?
+                CONFIG.getApiBase() : window.location.origin + "/api";
+            fetch(apiBase + "/server-status", { cache: "no-store" })
+                .then(response => {
+                    if (!response.ok) throw new Error("Status service returned HTTP " + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    if (typeof data.gameOnline !== "boolean" ||
+                        !Number.isFinite(data.serversRunning) ||
+                        !Number.isFinite(data.playersOnline) ||
+                        !Number.isFinite(data.gamePort)) {
+                        throw new Error("Invalid server status response.");
+                    }
+                    statusBadge.textContent = data.gameOnline ? "Online" : "Offline";
+                    statusBadge.className = "public-status-badge " + (data.gameOnline ? "online" : "offline");
+                    document.getElementById("publicServerCount").textContent =
+                        data.serversRunning + " / " + data.configuredServers;
+                    document.getElementById("publicPlayerCount").textContent = data.playersOnline.toLocaleString();
+                    document.getElementById("publicGameAddress").textContent =
+                        window.location.hostname + ":" + data.gamePort;
+                    document.getElementById("publicStatusChecked").textContent =
+                        "Last checked " + new Date(data.checkedAt).toLocaleTimeString();
+                })
+                .catch(() => {
+                    statusBadge.textContent = "Unavailable";
+                    statusBadge.className = "public-status-badge unavailable";
+                    document.getElementById("publicServerCount").textContent = "—";
+                    document.getElementById("publicPlayerCount").textContent = "—";
+                    document.getElementById("publicGameAddress").textContent = "—";
+                    document.getElementById("publicStatusChecked").textContent = "Could not retrieve live server status.";
+                });
+        }
+
+        function loadLatestUpdates() {
+            fetch("/client-updates/manifest.json", { cache: "no-store" })
+                .then(response => {
+                    if (!response.ok) throw new Error("Update manifest is unavailable.");
+                    return response.json();
+                })
+                .then(manifest => {
+                    if (!manifest || typeof manifest.version !== "string" || !Array.isArray(manifest.files))
+                        throw new Error("Invalid update manifest.");
+
+                    const summary = document.getElementById("latestUpdateSummary");
+                    const list = document.getElementById("latestUpdateFiles");
+                    list.replaceChildren();
+                    if (manifest.files.length === 0) {
+                        summary.textContent = "No client update package has been published yet.";
+                        return;
+                    }
+
+                    summary.textContent = "Latest update " + manifest.version + " (" + manifest.files.length + " files).";
+                    manifest.files.slice(0, 20).forEach(file => {
+                        if (!file || typeof file.path !== "string") return;
+                        const item = document.createElement("li");
+                        const link = document.createElement("a");
+                        const encodedPath = file.path.split("/").map(encodeURIComponent).join("/");
+                        link.href = "/client-updates/files/" + encodedPath;
+                        link.textContent = file.path;
+                        item.appendChild(link);
+                        list.appendChild(item);
+                    });
+                    if (manifest.files.length > 20) {
+                        const more = document.createElement("li");
+                        more.textContent = (manifest.files.length - 20) + " more files; use the update launcher to install them.";
+                        list.appendChild(more);
+                    }
+                })
+                .catch(() => {
+                    document.getElementById("latestUpdateSummary").textContent =
+                        "Latest update information is unavailable right now.";
+                });
+        }
+
+        refreshServerStatus();
+        loadLatestUpdates();
+        window.setInterval(refreshServerStatus, 30000);
+        window.setInterval(loadLatestUpdates, 60000);
+    }
+
     // Tab Switching
     function switchTab(tabName) {
         // Deactivate all tabs
@@ -118,6 +222,7 @@
         const body = new URLSearchParams();
         body.append("username", username);
         body.append("password", password);
+        body.append("passwordConfirm", passwordConfirm);
 
         fetch(CONFIG.getApiBase() + "/register", {
             method: "POST",
@@ -272,8 +377,11 @@
         .then(response => response.json().then(result => ({ ok: response.ok, result: result })))
         .then(response => {
             if (response.ok) {
+                if (!response.result.token) {
+                    throw new Error("The login service returned no session token.");
+                }
                 // Store login token and username
-                localStorage.setItem('userToken', response.result.token || 'token_' + Date.now());
+                localStorage.setItem('userToken', response.result.token);
                 localStorage.setItem('username', username);
                 
                 loginMessage.textContent = "✨ Login successful! Redirecting to dashboard...";
@@ -281,7 +389,7 @@
                 
                 // Redirect to dashboard after 1 second
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                    window.location.href = '/dashboard.html';
                 }, 1000);
             } else {
                 loginMessage.textContent = "❌ " + (response.result.message || "Invalid username or password. Please try again.");
@@ -300,5 +408,6 @@
     });
 
     // Initialize password strength on load
+    initializePublicPortal();
     updatePasswordStrength();
 }());

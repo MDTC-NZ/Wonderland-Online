@@ -13,6 +13,7 @@ using Game.Maps;
 using Network;
 using Plugin;
 using RCLibrary.Core.Networking;
+using Wonderland_Private_Server.DataManagement.DataFiles;
 
 namespace Server
 {
@@ -23,6 +24,7 @@ namespace Server
     {
         Thread Mainthrd,Eventthrd;
         bool killFlag;
+        readonly PluginManager mapPluginHost;
         readonly ManualResetEvent mylock;
         //readonly Semaphore ProcessLock,SendLock;
         //public event onWorldEvent WorldEvent;
@@ -38,8 +40,6 @@ namespace Server
         /// <summary>
         /// Maps loaded into the world
         /// </summary>
-        ConcurrentDictionary<ushort, GameMap> MapList;
-               
         // System.Diagnostics.Stopwatch exptimer = new System.Diagnostics.Stopwatch();
         /// <summary>
         /// Clients that are in the Process of Logging into the Server
@@ -52,9 +52,9 @@ namespace Server
 
         public WorldServer(PluginManager src):base(src)
         {
+            mapPluginHost = src;
             mylock = new ManualResetEvent(false);
             QueuedPlayerLogin = new Queue<Player>();
-            MapList = new ConcurrentDictionary<ushort, GameMap>();
         }
         
         public void OnLogin(Player client)
@@ -84,6 +84,7 @@ namespace Server
 
         public void Initialize()
         {
+            LoadEveMaps();
             killFlag = false;
             Mainthrd = new Thread(new ThreadStart(MainLoop));
             Mainthrd.Name = "World Manager Main Thread";
@@ -91,6 +92,58 @@ namespace Server
             Eventthrd = new Thread(new ThreadStart(Eventwrk));
             Eventthrd.Name = "World Manager Event Thread";
             Eventthrd.Init();
+        }
+
+        void LoadEveMaps()
+        {
+            if (cGlobal.gEveManager == null)
+            {
+                DebugSystem.Write("[MapSystem][Warning] EVE map data is unavailable; no maps were preloaded.");
+                return;
+            }
+
+            int loaded = 0;
+            foreach (ushort mapID in cGlobal.gEveManager.MapIDs)
+            {
+                if (GetMap(mapID) != null)
+                    loaded++;
+            }
+
+            DebugSystem.Write("[MapSystem][Info] Loaded " + loaded + " of " +
+                cGlobal.gEveManager.MapCount + " maps from EVE data.");
+        }
+
+        public List<Player> GetOnlinePlayers()
+        {
+            return MapList.Values
+                .SelectMany(map => map.GetPlayers())
+                .Where(player => player != null && !player.isDisconnected())
+                .GroupBy(player => player.CharID)
+                .Select(group => group.First())
+                .ToList();
+        }
+
+        public bool TeleportPlayer(uint characterID, ushort mapID, ushort x, ushort y)
+        {
+            Player player = GetOnlinePlayers().FirstOrDefault(candidate => candidate.CharID == characterID);
+            if (player == null || player.CurMap == null || player.MyBattle != null || GetMap(mapID) == null)
+                return false;
+
+            GameMap currentMap = player.CurMap as GameMap;
+            if (currentMap == null)
+                return false;
+
+            return currentMap.Teleport(TeleportType.CmD, player, 0,
+                new WarpData { DstMap = mapID, DstX_Axis = x, DstY_Axis = y });
+        }
+
+        public int GiveItemToPlayer(uint characterID, ushort itemID, byte amount)
+        {
+            Player player = GetOnlinePlayers().FirstOrDefault(candidate => candidate.CharID == characterID);
+            if (player == null || player.Inv == null || cGlobal.ItemDatManager == null || amount == 0)
+                return 0;
+
+            return player.Inv.AddItemCount(itemID, amount);
         }
 
         public void Kill()
@@ -315,24 +368,69 @@ namespace Server
         //    }
         //}
 
-        public GameMap GetMap(ushort ID)
+        public new GameMap GetMap(ushort ID)
         {
-            GameMap tmp = null;
+            GameMap map;
+            if (MapList.TryGetValue(ID, out map))
+                return map;
 
-            if (MapList.Values.Count(c => c.MapID == ID) == 0)
+            map = base.GetMap(ID);
+            if (map != null && cGlobal.gEveManager != null)
             {
-                if ((tmp = base.GetMap(ID)) != null)
+                MapData data;
+                if (cGlobal.gEveManager.TryGetMapData(ID, out data))
                 {
-                    //cGlobal.gGameDataBase.SetupMap(ref tmp);
-                    if (MapList.TryAdd((ushort)tmp.MapID, tmp))
-                        DebugSystem.Write(DebugItemType.Info_Heavy, "Loaded Map {0}", tmp.MapID);
-                    return tmp;
+                    int skippedWarps = AddEveWarps(map, data);
+                    if (skippedWarps > 0)
+                        DebugSystem.Write("[MapSystem][Warning] Skipped " + skippedWarps + " unsupported warp entries for map " + ID + ".");
                 }
-                else
-                    return null;
             }
-            else
-                return MapList.Values.Single(c => c.MapID == ID);
+            if (map == null)
+                map = CreateEveMap(ID);
+            if (map == null)
+            {
+                DebugSystem.Write("[MapSystem][Warning] No plugin or EVE data is available for map " + ID + ".");
+                return null;
+            }
+
+            if (MapList.TryAdd(ID, map))
+            {
+                DebugSystem.Write(DebugItemType.Info_Heavy, "Loaded Map {0}", map.MapID);
+                return map;
+            }
+            return MapList[ID];
+        }
+
+        GameMap CreateEveMap(ushort mapID)
+        {
+            MapData data;
+            if (cGlobal.gEveManager == null || !cGlobal.gEveManager.TryGetMapData(mapID, out data))
+                return null;
+
+            GameMap map = new GameMap(mapPluginHost, mapID, cGlobal.gEveManager.GetMapName(mapID));
+            int skippedWarps = AddEveWarps(map, data);
+            if (skippedWarps > 0)
+                DebugSystem.Write("[MapSystem][Warning] Skipped " + skippedWarps + " unsupported warp entries for map " + mapID + ".");
+            return map;
+        }
+
+        int AddEveWarps(GameMap map, MapData data)
+        {
+            int skipped = 0;
+            foreach (WarpInfo warp in data.WarpLoc)
+            {
+                if (warp.clickID > byte.MaxValue ||
+                    warp.x > ushort.MaxValue ||
+                    warp.y > ushort.MaxValue ||
+                    warp.mapID == 0)
+                {
+                    skipped++;
+                    continue;
+                }
+
+                map.AddWarp((byte)warp.clickID, warp.mapID, (ushort)warp.x, (ushort)warp.y);
+            }
+            return skipped;
         }
         
         //public bool onTelePort(TeleportType teletype, byte portalID, WarpData map, Player target)

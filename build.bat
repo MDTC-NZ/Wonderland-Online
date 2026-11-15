@@ -97,9 +97,9 @@ if exist "bin\Release" (
   echo Next steps:
   echo   1. The server application is ready in bin\Release
   echo   2. Configure DNS for wlo.kiaoragaming.xyz
-  echo   3. Set up firewall rules for ports 8090 and 7777
+  echo   3. Set up firewall rules for ports 8080 and 7777
   echo   4. Run the server application
-  echo   5. Visit http://wlo.kiaoragaming.xyz:8090 to access registration page
+  echo   5. Visit http://localhost:8080 to access registration and dashboard
   echo.
 )
 

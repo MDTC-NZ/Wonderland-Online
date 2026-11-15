@@ -4,11 +4,14 @@
  */
 
 let CONFIG = {
+    supportEmail: "support@wlo.kiaoragaming.xyz",
+    clientDownloadUrl: "",
+
     // Production server
     server: {
         domain: "wlo.kiaoragaming.xyz",
-        game_port: 5423,
-        api_port: 5423,
+        game_port: 6414,
+        api_port: 8080,
         use_https: true
     },
     
@@ -16,7 +19,7 @@ let CONFIG = {
     local: {
         domain: "localhost",
         game_port: 6414,
-        api_port: 8090,
+        api_port: 8080,
         use_https: false
     },
     
@@ -28,15 +31,7 @@ let CONFIG = {
     
     // Get API base URL
     getApiBase: function() {
-        const config = this.isProduction() ? this.server : this.local;
-        const protocol = config.use_https ? 'https' : 'http';
-        const port = config.api_port;
-        
-        // If port is standard for protocol, omit it
-        if ((config.use_https && port === 443) || (!config.use_https && port === 80)) {
-            return `${protocol}://${config.domain}/api`;
-        }
-        return `${protocol}://${config.domain}:${port}/api`;
+        return window.location.origin + "/api";
     },
     
     // Get game server info

@@ -9,6 +9,26 @@ namespace Server.Config
 {
     public class DataBaseConfig : INotifyPropertyChanged
     {
+        public DataBaseConfig()
+        {
+            Server_Type = RCLibrary.Core.DataBaseTypes.Sqlite;
+            DataBase = System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "PServer",
+                "LocalServer.sqlite");
+            TableName_Ref = "user";
+            Username_Ref = "username";
+            Password_Ref = "password";
+            UserID_Ref = "userID";
+            CharacterID1_Ref = "character1ID";
+            CharacterID2_Ref = "character2ID";
+            IM_Ref = "IM";
+            Char_Delete_Code_Ref = "char_delete_code";
+            PassVerification = 0;
+            Port = 0;
+            ServerIP = "127.0.0.1";
+        }
+
         //return the following information
 
         //MySql/SQl Settings

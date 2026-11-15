@@ -1,31 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Phoenix.Core\\Phoenix.Core.csproj": {}
+    "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Phoenix.Core\\Phoenix.Core.csproj": {
+    "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Phoenix.Core\\Phoenix.Core.csproj",
+        "projectUniqueName": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
         "projectName": "Phoenix.Core",
-        "projectPath": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Phoenix.Core\\Phoenix.Core.csproj",
-        "packagesPath": "C:\\Users\\Muhammet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Muhammet\\Documents\\GitHub\\Wonderland-Private-Server\\Phoenix.Core\\obj\\",
+        "projectPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+        "packagesPath": "C:\\Users\\hayde\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Muhammet\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\hayde\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net462"
         ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
         "frameworks": {
           "net462": {
+            "framework": "net462",
             "targetAlias": "net462",
             "projectReferences": {}
           }
@@ -40,18 +36,25 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "11.0.100"
       },
       "frameworks": {
         "net462": {
+          "framework": "net462",
           "targetAlias": "net462",
           "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[9.1.0, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -18,7 +18,7 @@ You now have a **complete player dashboard system** with:
 ## 🚀 START HERE (2 Minutes)
 
 ### 1. **Open Test Page**
-Go to: **http://localhost:8090/test.html**
+Go to: **http://localhost:8080/test.html**
 
 This page has easy buttons to test everything!
 
@@ -132,7 +132,7 @@ On the dashboard:
 
 ### From Registration Page
 ```
-http://localhost:8090/
+http://localhost:8080/
 ├── Create Account tab
 │   └── Fill form → Click "Create Account"
 │
@@ -149,7 +149,7 @@ http://localhost:8090/
 
 ### From Dashboard
 ```
-http://localhost:8090/dashboard.html
+http://localhost:8080/dashboard.html
 ├── ⚔️ Characters
 │   ├── View your characters
 │   ├── Delete character
@@ -289,7 +289,7 @@ POST /api/reset-password    - Reset password
 
 ## 🧪 Testing Checklist
 
-Use **http://localhost:8090/test.html** to verify:
+Use **http://localhost:8080/test.html** to verify:
 
 - [x] Create account with test.html button
 - [x] Login with test.html button
@@ -373,13 +373,13 @@ To make this live for your players:
 
 2. **Windows Firewall**
    ```
-   netsh advfirewall firewall add rule name="WLO Server" dir=in action=allow protocol=tcp localport=8090
+   netsh advfirewall firewall add rule name="WLO Server" dir=in action=allow protocol=tcp localport=8080
    ```
 
 3. **Access**
    ```
-   Registration: http://wlo.kiaoragaming.xyz:8090
-   Dashboard: http://wlo.kiaoragaming.xyz:8090/dashboard.html
+   Registration: http://wlo.kiaoragaming.xyz:8080
+   Dashboard: http://wlo.kiaoragaming.xyz:8080/dashboard.html
    ```
 
 4. **Database Integration** (Coming Next)
@@ -404,7 +404,7 @@ A: Intended! Maximum 2 characters per account. Delete one first.
 A: This feature is ready in the form, but needs API implementation on backend.
 
 **Q: Can't see login tab on registration page**
-A: Make sure you're accessing http://localhost:8090 (the server)
+A: Make sure you're accessing http://localhost:8080 (the server)
 
 **Q: Characters disappear when I refresh**
 A: They're saved in localStorage. Check that localStorage isn't full.
@@ -427,7 +427,7 @@ Your complete player management system is now live:
 **All without requiring players to log into the game client!** 🌟
 
 ### Start Testing Now:
-1. Open: http://localhost:8090/test.html
+1. Open: http://localhost:8080/test.html
 2. Create account → Login → Dashboard
 3. Create characters → Explore features
 4. Check all tabs work

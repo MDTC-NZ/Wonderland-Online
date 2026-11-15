@@ -326,30 +326,35 @@ namespace Game
             {
                 if (quest.RewardEXP > 0)
                 {
-                    m_player.AddExp(quest.RewardEXP);
+                    m_player.CurExp += quest.RewardEXP;
                     log.Info($"Player {m_player.CharID} gained {quest.RewardEXP} EXP from quest {quest.QuestID}");
                 }
 
                 if (quest.RewardMoney > 0)
                 {
-                    m_player.AddMoney(quest.RewardMoney);
+                    m_player.AddGold(quest.RewardMoney);
                     log.Info($"Player {m_player.CharID} gained {quest.RewardMoney} money from quest {quest.QuestID}");
                 }
 
                 foreach (var reward in quest.ItemRewards)
                 {
-                    if (reward.ItemID > 0)
+                    if (reward.ItemID > 0 && reward.ItemID <= ushort.MaxValue && reward.Quantity > 0)
                     {
-                        m_player.AddItemToInventory(reward.ItemID, reward.Quantity);
+                        int remaining = reward.Quantity;
+                        while (remaining > 0)
+                        {
+                            byte quantity = (byte)Math.Min(remaining, byte.MaxValue);
+                            m_player.Inv.AddItem((ushort)reward.ItemID, quantity);
+                            remaining -= quantity;
+                        }
                         log.Info($"Player {m_player.CharID} gained {reward.Quantity}x item {reward.ItemID} from quest {quest.QuestID}");
                     }
+                    else
+                        log.Warn($"Quest {quest.QuestID} has an invalid item reward.");
                 }
 
-                foreach (var skillID in quest.RewardSkills)
-                {
-                    m_player.LearnSkill(skillID);
-                    log.Info($"Player {m_player.CharID} learned skill {skillID} from quest {quest.QuestID}");
-                }
+                if (quest.RewardSkills.Count > 0)
+                    log.Warn($"Quest {quest.QuestID} contains skill rewards, but this server has no skill-learning implementation.");
             }
             catch (Exception ex)
             {

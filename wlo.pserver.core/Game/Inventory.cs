@@ -172,10 +172,22 @@ namespace Game.Code
         }
         public void AddItem(ushort ID, byte amt)
         {
+            AddItemCount(ID, amt);
+        }
+
+        public int AddItemCount(ushort ID, byte amt)
+        {
+            if (ItemDat == null || amt == 0)
+                return 0;
+
+            PhxItemInfo itemData = ItemDat.GetItemList().FirstOrDefault(item => item.ItemID == ID);
+            if (itemData == null)
+                return 0;
+
             InvItem i = new InvItem();
-            i.CopyFrom(ItemDat.GetItemByID(ID));
+            i.CopyFrom(itemData);
             i.Ammt = amt;
-            AddItem(i);
+            return AddItem(i);
         }
         /// <summary>
         /// Adds an item to the Inventory
@@ -250,9 +262,9 @@ namespace Game.Code
                         owner.Send(tmp);
                     }
                     if (totalammt == item.Ammt || at != 0)
-                        return ammt;
+                        return totalammt;
                 }
-                return 0;
+                return totalammt;
             }
         }
         /// <summary>

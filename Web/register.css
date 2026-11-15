@@ -27,16 +27,17 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
     background: linear-gradient(135deg, #0a0f1b 0%, #1a1f3a 100%);
     color: var(--text-primary);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     min-height: 100vh;
+    height: auto;
     padding: 20px;
     position: relative;
     overflow-x: hidden;
@@ -94,9 +95,10 @@ body {
 /* Container & Layout */
 .container {
     width: 100%;
-    max-width: 520px;
+    max-width: 760px;
     position: relative;
     z-index: 2;
+    margin: auto;
 }
 
 .header {
@@ -121,6 +123,131 @@ body {
     margin: 0;
     font-size: 1.1rem;
     font-weight: 500;
+}
+
+.public-hub {
+    margin: 0 0 28px;
+    padding: 22px;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    background: rgba(26, 37, 64, 0.88);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+}
+
+.public-hub-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.public-hub-heading h2,
+.public-download-card h3 {
+    margin: 0 0 5px;
+}
+
+.public-hub-heading p,
+.public-download-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.public-status-badge {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.public-status-badge.online {
+    color: var(--success-color);
+    border-color: rgba(169, 216, 179, 0.45);
+}
+
+.public-status-badge.offline,
+.public-status-badge.unavailable {
+    color: var(--error-color);
+    border-color: rgba(255, 170, 170, 0.45);
+}
+
+.public-status-grid,
+.public-download-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.public-status-card,
+.public-download-card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 11px;
+    background: rgba(10, 15, 27, 0.42);
+}
+
+.public-status-card span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.public-status-card strong {
+    display: block;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+    font-size: 1.15rem;
+}
+
+.public-status-updated {
+    min-height: 1.2em;
+    margin: 10px 0 18px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.public-download-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.public-download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.public-download-card .btn {
+    width: 100%;
+    text-decoration: none;
+}
+
+.public-download-card [hidden] {
+    display: none;
+}
+
+.manifest-link {
+    color: var(--primary-light);
+    overflow-wrap: anywhere;
+}
+
+.latest-update-files {
+    width: 100%;
+    max-height: 140px;
+    overflow: auto;
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.latest-update-files a {
+    color: var(--primary-light);
+    overflow-wrap: anywhere;
 }
 
 @keyframes slideDown {
@@ -535,6 +662,24 @@ input:focus ~ .input-icon {
 
 /* Responsive */
 @media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .public-hub {
+        padding: 16px;
+    }
+
+    .public-hub-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .public-status-grid,
+    .public-download-grid {
+        grid-template-columns: 1fr;
+    }
+
     .card {
         padding: 28px 20px;
     }

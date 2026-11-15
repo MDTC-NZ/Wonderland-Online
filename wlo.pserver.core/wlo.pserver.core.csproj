@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLLS\RCLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\DLLS\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -104,6 +107,8 @@
     <Compile Include="Game\PlayerRelated\Character.cs" />
     <Compile Include="Game\PlayerRelated\Equip.cs" />
     <Compile Include="Game\PlayerRelated\inGameSettings.cs" />
+    <Compile Include="Game\PlayerRelated\Quest.cs" />
+    <Compile Include="Game\PlayerRelated\QuestManager.cs" />
     <Compile Include="Game\PlayerRelated\Tent\Tent.cs" />
     <Compile Include="Game\PlayerRelated\Tent\TentItem.cs" />
     <Compile Include="Game\PlayerRelated\Tent\TentItemContainer.cs" />

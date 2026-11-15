@@ -203,6 +203,10 @@ The current WinForms GUI runs as a console/GUI application. To run as a service:
 - Login and world functionality are partial
 - This is **not yet a fully playable game**
 
+### Map Loading
+
+At startup, the server preloads map records from `gamedata\eve.Emg`. Plugin-defined maps take precedence; other EVE records use the generic map implementation and use names from `Data\SceneData.Dat` when available. This loads map records and supported warp entries, but does not provide missing NPC, item, or other gameplay content.
+
 ---
 
 ## Deployment Options

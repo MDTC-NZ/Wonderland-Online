@@ -75,20 +75,25 @@ namespace Plugin
                 var asm = Assembly.Load(File.ReadAllBytes(e.FullPath));
                 Type[] types = asm.GetTypes();
 
-                if (types.Count(c => typeof(GameMap).IsAssignableFrom(c)) > 0)
+                Type mapType = types.FirstOrDefault(c =>
+                    c.IsClass && !c.IsAbstract && c.IsPublic && typeof(GameMap).IsAssignableFrom(c));
+                if (mapType != null)
                 {
                     for (int a = 0; a < MapList.Count; a++)
                     {
                         if (MapList[a].FileID == file.Name && file.LastWriteTime > MapList[a].Lastwrite)
                         {
-                            MapList[a] = (GameMap)Activator.CreateInstance(asm.GetType(types.Single(c => typeof(GameMap).IsAssignableFrom(c)).ToString()), new object[] { this, new FileInfo(e.FullPath) });
+                            MapList[a] = (GameMap)Activator.CreateInstance(mapType, new object[] { this, new FileInfo(e.FullPath) });
                            DebugSystem.Write("[PluginSystem][Info] - Map " + MapList[a].MapID + " has been updated");
                             break;
                         }
                     }
                 }
             }
-            catch (Exception d) { }
+            catch (Exception d)
+            {
+                DebugSystem.Write(new ExceptionData(d));
+            }
         }
 
         void folderwatch_Created(object sender, FileSystemEventArgs e)
@@ -101,10 +106,11 @@ namespace Plugin
                 var asm = Assembly.Load(File.ReadAllBytes(e.FullPath));
 
                 Type[] types = asm.GetTypes();
-                if (types.Count(c => typeof(GameMap).IsAssignableFrom(c)) > 0)
+                Type mapType = types.FirstOrDefault(c =>
+                    c.IsClass && !c.IsAbstract && c.IsPublic && typeof(GameMap).IsAssignableFrom(c));
+                if (mapType != null)
                 {
-                    Type type = types.Single(c => typeof(GameMap).IsAssignableFrom(c) && c.IsPublic);
-                    var gh = (GameMap)Activator.CreateInstance(asm.GetType(type.ToString()), new object[] { this, new FileInfo(e.FullPath) });
+                    var gh = (GameMap)Activator.CreateInstance(mapType, new object[] { this, new FileInfo(e.FullPath) });
 
                     if (MapList.Count(c => c.FileID == file.Name) == 0)
                     {
@@ -112,8 +118,13 @@ namespace Plugin
                         DebugSystem.Write("[PluginSystem][Info] - Map " + gh.MapID + " has been loaded into the server");
                     }
                 }
+                else
+                    DebugSystem.Write("[PluginSystem][Warning] - " + file.Name + " has no public GameMap implementation and was skipped");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugSystem.Write(new ExceptionData(ex));
+            }
         }
 
         void folderwatch_Deleted(object sender, FileSystemEventArgs e)
@@ -156,10 +167,11 @@ namespace Plugin
                     var asm = Assembly.Load(File.ReadAllBytes(e.FullName));
 
                     Type[] types = asm.GetTypes();
-                    if (types.Count(c => typeof(GameMap).IsAssignableFrom(c)) > 0)
+                    Type mapType = types.FirstOrDefault(c =>
+                        c.IsClass && !c.IsAbstract && c.IsPublic && typeof(GameMap).IsAssignableFrom(c));
+                    if (mapType != null)
                     {
-                        Type type = types.Single(c => typeof(GameMap).IsAssignableFrom(c) && c.IsPublic);
-                        var gh = (GameMap)Activator.CreateInstance(asm.GetType(type.ToString()), new object[] { this, e });
+                        var gh = (GameMap)Activator.CreateInstance(mapType, new object[] { this, e });
 
                         if (MapList.Count(c => c.FileID == file.Name) == 0)
                         {
@@ -167,11 +179,16 @@ namespace Plugin
                             DebugSystem.Write("[PluginSystem][Info] - Map " + gh.MapID + " has been loaded into the server");
                         }
                     }
+                    else
+                        DebugSystem.Write("[PluginSystem][Warning] - " + file.Name + " has no public GameMap implementation and was skipped");
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    DebugSystem.Write(new ExceptionData(ex));
+                }
             }
 
-            DebugSystem.Write("[PluginSystem][Info] - Found " + MapList.Count + " Maps");
+            DebugSystem.Write("[PluginSystem][Info] - Found " + MapList.Count + " map plugin(s)");
         }
 
         //public AC GetAC(int id)

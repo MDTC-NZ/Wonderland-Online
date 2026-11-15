@@ -23,12 +23,12 @@ if errorlevel 1 (
 
 REM Check Registration Server  
 echo.
-echo Checking Registration Server (Port 8090)...
-netstat -ano | findstr :8090 >nul
+echo Checking Registration Server (Port 8080)...
+netstat -ano | findstr :8080 >nul
 if errorlevel 1 (
     echo   [X] Registration Server NOT RUNNING
 ) else (
-    echo   [OK] Registration Server is listening on port 8090
+    echo   [OK] Registration Server is listening on port 8080
 )
 
 REM Check Python
@@ -45,7 +45,7 @@ if errorlevel 1 (
 REM Check network connectivity
 echo.
 echo Testing HTTP connectivity...
-powershell -Command "try { Invoke-WebRequest -Uri 'http://localhost:8090/' -TimeoutSec 2 -ErrorAction Stop | Out-Null; Write-Host '   [OK] Registration server responding to HTTP'; exit 0 } catch { Write-Host '   [X] Cannot connect to registration server'; exit 1 }"
+powershell -Command "try { Invoke-WebRequest -Uri 'http://localhost:8080/' -TimeoutSec 2 -ErrorAction Stop | Out-Null; Write-Host '   [OK] Registration server responding to HTTP'; exit 0 } catch { Write-Host '   [X] Cannot connect to registration server'; exit 1 }"
 
 echo.
 echo =====================================
