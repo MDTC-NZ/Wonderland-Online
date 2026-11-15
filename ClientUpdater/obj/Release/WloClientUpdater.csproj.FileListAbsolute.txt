@@ -10,7 +10,7 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfd.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfkc.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfkd.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.AssemblyReference.cache
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.CoreCompileInputs.cache
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseAdminValidation\WloClientUpdater.exe
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseAdminValidation\WloClientUpdater.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.AssemblyReference.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.CoreCompileInputs.cache

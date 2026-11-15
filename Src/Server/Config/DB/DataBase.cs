@@ -12,7 +12,7 @@ namespace Server.Config
         public DataBaseConfig()
         {
             Server_Type = RCLibrary.Core.DataBaseTypes.Sqlite;
-            DataBase = System.IO.Path.Combine(
+            DataBase = global::System.IO.Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "PServer",
                 "LocalServer.sqlite");

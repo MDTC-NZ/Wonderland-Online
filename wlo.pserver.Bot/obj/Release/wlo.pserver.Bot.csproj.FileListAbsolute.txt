@@ -12,7 +12,7 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\b
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\ReleaseDiag\normnfd.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\ReleaseDiag\normnfkc.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\ReleaseDiag\normnfkd.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.csproj.AssemblyReference.cache
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.csproj.CoreCompileInputs.cache
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\ReleaseAdminValidation\wlo.pserver.Bot.dll
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\bin\ReleaseAdminValidation\wlo.pserver.Bot.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.csproj.AssemblyReference.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\wlo.pserver.Bot\obj\Release\wlo.pserver.Bot.csproj.CoreCompileInputs.cache

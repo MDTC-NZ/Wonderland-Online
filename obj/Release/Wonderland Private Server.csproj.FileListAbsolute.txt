@@ -99,9 +99,6 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\n
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfd.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfkc.nlp
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseDiag\normnfkd.nlp
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.AssemblyReference.cache
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.CoreCompileInputs.cache
-C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\wlo.pserver.core.dll.config
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.html
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.css
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\Web\register.js
@@ -131,4 +128,11 @@ C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminV
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.xml
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\EntityFramework.SqlServer.xml
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\ReleaseAdminValidation\log4net.xml
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.AssemblyReference.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\index.html
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\Web\home.css
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\wlo.pserver.core.dll.config
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderland Private Server.csproj.CoreCompileInputs.cache
 C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\obj\Release\Wonderla.9E251513.Up2Date

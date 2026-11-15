@@ -4,21 +4,16 @@
     // DOM Elements
     const registrationForm = document.getElementById("registration-form");
     const loginForm = document.getElementById("login-form");
-    const forgotForm = document.getElementById("forgot-form");
     const registrationMessage = document.getElementById("form-message");
     const loginMessage = document.getElementById("login-message");
-    const forgotMessage = document.getElementById("forgot-message");
     const registrationSubmit = registrationForm.querySelector("button[type=submit]");
     const loginSubmit = loginForm.querySelector("button[type=submit]");
-    const forgotSubmit = forgotForm.querySelector("button[type=submit]");
     const passwordInput = document.getElementById("password");
     const strengthFill = document.querySelector(".strength-fill");
     const strengthText = document.getElementById("strength");
     const tabButtons = document.querySelectorAll(".tab-button");
     const tabContents = document.querySelectorAll(".tab-content");
     const switchTabButtons = document.querySelectorAll(".switch-tab");
-    const forgotStep2 = document.getElementById("forgot-step-2");
-    const forgotBtnText = document.getElementById("forgot-btn-text");
 
     function initializePublicPortal() {
         const statusBadge = document.getElementById("publicServerStatus");
@@ -87,6 +82,8 @@
                     if (!manifest || typeof manifest.version !== "string" || !Array.isArray(manifest.files))
                         throw new Error("Invalid update manifest.");
 
+                    document.getElementById("updaterDownloadLink").hidden = false;
+                    document.getElementById("updateManifestLink").hidden = false;
                     const summary = document.getElementById("latestUpdateSummary");
                     const list = document.getElementById("latestUpdateFiles");
                     list.replaceChildren();
@@ -115,6 +112,8 @@
                 .catch(() => {
                     document.getElementById("latestUpdateSummary").textContent =
                         "Latest update information is unavailable right now.";
+                    document.getElementById("updaterDownloadLink").hidden = true;
+                    document.getElementById("updateManifestLink").hidden = true;
                 });
         }
 
@@ -252,101 +251,6 @@
         });
     });
 
-    // Forgot Password Form Handler
-    forgotForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        forgotMessage.textContent = "";
-        forgotMessage.className = "message";
-
-        const step2Visible = !forgotStep2.classList.contains("hidden");
-
-        if (!step2Visible) {
-            // Step 1: Verify username
-            const username = forgotForm.elements.username.value.trim();
-
-            if (!username) {
-                forgotMessage.textContent = "❌ Please enter your username.";
-                forgotMessage.className = "message error";
-                return;
-            }
-
-            forgotSubmit.disabled = true;
-            forgotSubmit.textContent = "Verifying...";
-
-            // Simulate username verification
-            setTimeout(() => {
-                forgotMessage.textContent = "✨ Username verified! Please enter your new password.";
-                forgotMessage.className = "message";
-                forgotStep2.classList.remove("hidden");
-                forgotBtnText.textContent = "Reset Password";
-                forgotSubmit.disabled = false;
-                forgotSubmit.textContent = "Reset Password";
-            }, 1000);
-
-        } else {
-            // Step 2: Reset password
-            const newPassword = forgotForm.elements.newPassword.value;
-            const newPasswordConfirm = forgotForm.elements.newPasswordConfirm.value;
-            const username = forgotForm.elements.username.value.trim();
-
-            if (!newPassword || !newPasswordConfirm) {
-                forgotMessage.textContent = "❌ Please enter and confirm your new password.";
-                forgotMessage.className = "message error";
-                return;
-            }
-
-            if (newPassword !== newPasswordConfirm) {
-                forgotMessage.textContent = "❌ New passwords do not match.";
-                forgotMessage.className = "message error";
-                return;
-            }
-
-            if (newPassword.length < 4) {
-                forgotMessage.textContent = "❌ Password must be at least 4 characters.";
-                forgotMessage.className = "message error";
-                return;
-            }
-
-            forgotSubmit.disabled = true;
-            forgotSubmit.textContent = "Resetting...";
-
-            const body = new URLSearchParams();
-            body.append("username", username);
-            body.append("newPassword", newPassword);
-
-            fetch(CONFIG.getApiBase() + "/reset-password", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-                body: body.toString()
-            })
-            .then(response => response.json().then(result => ({ ok: response.ok, result: result })))
-            .then(response => {
-                if (response.ok) {
-                    forgotMessage.textContent = "✨ Password reset successfully! You can now log in with your new password.";
-                    forgotMessage.className = "message";
-                    forgotForm.reset();
-                    forgotStep2.classList.add("hidden");
-                    forgotBtnText.textContent = "Send Reset Link";
-                    setTimeout(() => {
-                        switchTab("register");
-                    }, 2000);
-                } else {
-                    forgotMessage.textContent = "❌ " + (response.result.message || "Password reset failed. Please try again.");
-                    forgotMessage.className = "message error";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                forgotMessage.textContent = "❌ Could not reach the service. Please try again later.";
-                forgotMessage.className = "message error";
-            })
-            .finally(() => {
-                forgotSubmit.disabled = false;
-                forgotSubmit.textContent = "Reset Password";
-            });
-        }
-    });
-
     // Login Form Handler
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -410,4 +314,9 @@
     // Initialize password strength on load
     initializePublicPortal();
     updatePasswordStrength();
+
+    const initialTab = window.location.hash.slice(1);
+    if (["register", "login", "forgot", "login-info"].includes(initialTab)) {
+        switchTab(initialTab);
+    }
 }());

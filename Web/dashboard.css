@@ -71,6 +71,16 @@ html, body {
     font-size: 14px;
 }
 
+.home-link {
+    color: var(--primary);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
 .logout-btn {
     background: rgba(255, 0, 110, 0.2);
     border: 1px solid var(--secondary);

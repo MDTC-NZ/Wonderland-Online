@@ -1028,8 +1028,6 @@ namespace Wonderland_Private_Server
                 cGlobal.SrvSettings.DB.IM_Ref = string.IsNullOrEmpty(cGlobal.SrvSettings.DB.IM_Ref) ? "IM" : cGlobal.SrvSettings.DB.IM_Ref;
                 cGlobal.SrvSettings.DB.Char_Delete_Code_Ref = string.IsNullOrEmpty(cGlobal.SrvSettings.DB.Char_Delete_Code_Ref) ? "char_delete_code" : cGlobal.SrvSettings.DB.Char_Delete_Code_Ref;
                 cGlobal.SrvSettings.DB.ServerIP = string.IsNullOrEmpty(cGlobal.SrvSettings.DB.ServerIP) ? "127.0.0.1" : cGlobal.SrvSettings.DB.ServerIP;
-                cGlobal.SrvSettings.DB.PassVerification = cGlobal.SrvSettings.DB.PassVerification == 0 ? 0 : cGlobal.SrvSettings.DB.PassVerification;
-
                 if (TableName != null) TableName.DataBindings.Add("Text", cGlobal.SrvSettings.DB, "TableName_Ref");
                 if (Username_Ref != null) Username_Ref.DataBindings.Add("Text", cGlobal.SrvSettings.DB, "Username_Ref");
                 if (Password_Ref != null) Password_Ref.DataBindings.Add("Text", cGlobal.SrvSettings.DB, "Password_Ref");
@@ -1120,10 +1118,8 @@ namespace Wonderland_Private_Server
                     string clientUpdatesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ClientUpdates");
                     registrationServer = new Server.RegistrationServer(cGlobal.gUserDataBase, cGlobal.gCharacterDataBase, webDirectory, certPath, null, clientUpdatesDirectory);
                     registrationServer.Start();
-                    string webProtocol = registrationServer.UsesHttps ? "https" : "http";
-                    string webHost = registrationServer.UsesHttps ? "wlo.kiaoragaming.xyz" : "localhost";
-                    DebugSystem.Write("Account registration and dashboard available at " + webProtocol + "://" + webHost + ":8080/");
-                    DebugSystem.Write("Client updates available at " + webProtocol + "://" + webHost + ":8080/client-updates/manifest.json");
+                    DebugSystem.Write("Account registration and dashboard available at https://wlo.kiaoragaming.xyz:8080/");
+                    DebugSystem.Write("Client updates available at https://wlo.kiaoragaming.xyz:8080/client-updates/manifest.json");
                 }
                 catch (Exception e)
                 {

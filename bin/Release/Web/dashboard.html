@@ -14,6 +14,7 @@
             <div class="header-content">
                 <h1>🎮 Wonderland Online</h1>
                 <div class="header-info" id="headerInfo">
+                    <a class="home-link" href="/">Home</a>
                     <span class="username">Welcome, <strong id="usernameDisplay">Player</strong></span>
                     <button class="logout-btn" data-action="logout">Logout</button>
                 </div>
@@ -404,6 +405,22 @@
                         <table class="admin-table">
                             <thead><tr><th>Character</th><th>Account</th><th>Level</th><th>Map</th><th>X</th><th>Y</th><th>Status</th></tr></thead>
                             <tbody id="adminOnlineBody"><tr><td colspan="7">Loading online players…</td></tr></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="admin-section">
+                    <div class="admin-section-heading">
+                        <div>
+                            <h3>Live game tools</h3>
+                            <p>These actions affect connected players immediately. Item grants are limited to 99 per request.</p>
+                        </div>
+                        <button class="btn btn-secondary" type="button" data-action="admin-refresh-game-players">Refresh</button>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead><tr><th>Character</th><th>Level</th><th>Map</th><th>X</th><th>Y</th><th>Actions</th></tr></thead>
+                            <tbody id="adminGamePlayersBody"><tr><td colspan="6">Loading live players…</td></tr></tbody>
                         </table>
                     </div>
                 </section>

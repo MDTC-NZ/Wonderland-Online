@@ -33,19 +33,18 @@ namespace Server
         readonly string clientUpdatesDirectory;
         readonly X509Certificate2 serverCertificate;
         readonly TcpListener listener;
+        readonly byte[] homePage;
+        readonly byte[] homeStylesheet;
         readonly byte[] page;
         readonly byte[] stylesheet;
         readonly byte[] script;
         readonly byte[] dashboardPage;
         readonly byte[] dashboardStylesheet;
         readonly byte[] dashboardScript;
-        readonly byte[] testPage;
         readonly byte[] configScript;
         readonly ConcurrentDictionary<string, WebSession> sessions = new ConcurrentDictionary<string, WebSession>();
         Thread listenerThread;
         volatile bool running;
-
-        public bool UsesHttps { get { return serverCertificate != null; } }
 
         sealed class WebSession
         {
@@ -68,22 +67,26 @@ namespace Server
             this.clientUpdatesDirectory = Path.GetFullPath(clientUpdatesDirectory ??
                 Path.Combine(Path.GetDirectoryName(Path.GetFullPath(webDirectory)), "ClientUpdates"));
 
-            if (!string.IsNullOrEmpty(certPath) && File.Exists(certPath))
-            {
-                serverCertificate = new X509Certificate2(certPath, certPassword);
-                if (!serverCertificate.HasPrivateKey)
-                    throw new InvalidOperationException("The web server certificate does not include its private key.");
-            }
+            if (string.IsNullOrWhiteSpace(certPath) || !File.Exists(certPath))
+                throw new FileNotFoundException("A TLS server certificate is required; the registration server will not start without it.", certPath);
+
+            serverCertificate = new X509Certificate2(certPath, certPassword);
+            if (!serverCertificate.HasPrivateKey)
+                throw new InvalidOperationException("The web server certificate does not include its private key.");
+            DateTime certificateTime = DateTime.Now;
+            if (certificateTime < serverCertificate.NotBefore || certificateTime > serverCertificate.NotAfter)
+                throw new InvalidOperationException("The web server certificate is not currently valid.");
             
+            homePage = File.ReadAllBytes(Path.Combine(webDirectory, "index.html"));
+            homeStylesheet = File.ReadAllBytes(Path.Combine(webDirectory, "home.css"));
             page = File.ReadAllBytes(Path.Combine(webDirectory, "register.html"));
             stylesheet = File.ReadAllBytes(Path.Combine(webDirectory, "register.css"));
             script = File.ReadAllBytes(Path.Combine(webDirectory, "register.js"));
             dashboardPage = File.ReadAllBytes(Path.Combine(webDirectory, "dashboard.html"));
             dashboardStylesheet = File.ReadAllBytes(Path.Combine(webDirectory, "dashboard.css"));
             dashboardScript = File.ReadAllBytes(Path.Combine(webDirectory, "dashboard.js"));
-            testPage = File.ReadAllBytes(Path.Combine(webDirectory, "test.html"));
             configScript = File.ReadAllBytes(Path.Combine(webDirectory, "config.js"));
-            listener = new TcpListener(serverCertificate == null ? IPAddress.Loopback : IPAddress.Any, Port);
+            listener = new TcpListener(IPAddress.Any, Port);
         }
 
         public void Start()
@@ -92,7 +95,7 @@ namespace Server
             running = true;
             listenerThread = new Thread(Listen);
             listenerThread.IsBackground = true;
-            listenerThread.Name = "Registration HTTP server";
+            listenerThread.Name = "Registration HTTPS server";
             listenerThread.Start();
         }
 
@@ -175,7 +178,11 @@ namespace Server
                                 ServeClientUpdateFile(stream, path.Substring("/client-updates/files/".Length));
                             else if (path == "/downloads/WloClientUpdater.exe")
                                 ServeClientUpdaterDownload(stream);
-                            else if (path == "/" || path == "/register.html")
+                            else if (path == "/" || path == "/index.html")
+                                WriteResponse(stream, 200, homePage, "text/html; charset=utf-8");
+                            else if (path == "/home.css")
+                                WriteResponse(stream, 200, homeStylesheet, "text/css; charset=utf-8");
+                            else if (path == "/register.html")
                                 WriteResponse(stream, 200, page, "text/html; charset=utf-8");
                             else if (path == "/register.css")
                                 WriteResponse(stream, 200, stylesheet, "text/css; charset=utf-8");
@@ -189,8 +196,6 @@ namespace Server
                                 WriteResponse(stream, 200, dashboardScript, "application/javascript; charset=utf-8");
                             else if (path == "/config.js")
                                 WriteResponse(stream, 200, configScript, "application/javascript; charset=utf-8");
-                            else if (path == "/test.html")
-                                WriteResponse(stream, 200, testPage, "text/html; charset=utf-8");
                             else
                                 WriteResponse(stream, 404, "Not found.", "text/plain; charset=utf-8");
                             return;
@@ -198,7 +203,6 @@ namespace Server
 
                         if (requestParts[0] != "POST" ||
                             (path != "/api/register" &&
-                             path != "/api/reset-password" &&
                              path != "/api/login" &&
                              path != "/api/characters" &&
                              path != "/api/characters/create" &&
@@ -248,36 +252,6 @@ namespace Server
                         if (!TryParseForm(Encoding.UTF8.GetString(body), out form))
                         {
                             WriteResponse(stream, 400, "{\"ok\":false,\"message\":\"Invalid form data.\"}", "application/json; charset=utf-8");
-                            return;
-                        }
-
-                        // Handle Password Reset
-                        if (path == "/api/reset-password")
-                        {
-                            string username;
-                            string newPassword;
-                            if (!form.TryGetValue("username", out username) ||
-                                !form.TryGetValue("newPassword", out newPassword))
-                            {
-                                WriteResponse(stream, 400, "{\"ok\":false,\"message\":\"Username and new password are required.\"}", "application/json; charset=utf-8");
-                                return;
-                            }
-
-                            try
-                            {
-                                if (!userDataBase.ResetPassword(username, newPassword))
-                                {
-                                    WriteResponse(stream, 404, "{\"ok\":false,\"message\":\"Username not found.\"}", "application/json; charset=utf-8");
-                                    return;
-                                }
-                            }
-                            catch (ArgumentException ex)
-                            {
-                                WriteResponse(stream, 400, "{\"ok\":false,\"message\":\"" + EscapeJson(ex.Message) + "\"}", "application/json; charset=utf-8");
-                                return;
-                            }
-
-                            WriteResponse(stream, 200, "{\"ok\":true,\"message\":\"Password reset successfully.\"}", "application/json; charset=utf-8");
                             return;
                         }
 
@@ -999,6 +973,7 @@ namespace Server
                                     WriteResponse(stream, 404, "{\"ok\":false,\"message\":\"Game account not found.\"}", "application/json; charset=utf-8");
                                     return;
                                 }
+                                InvalidateUserSessions(session.UserID);
                             }
                             catch (ArgumentException ex)
                             {
@@ -1040,9 +1015,6 @@ namespace Server
         Stream CreateRequestStream(TcpClient client)
         {
             NetworkStream networkStream = client.GetStream();
-            if (serverCertificate == null)
-                return networkStream;
-
             SslStream sslStream = new SslStream(networkStream, false);
             try
             {
@@ -1293,20 +1265,38 @@ namespace Server
             Uri originUri;
             if (!headers.TryGetValue("origin", out origin) ||
                 !headers.TryGetValue("host", out host) ||
-                !Uri.TryCreate(origin, UriKind.Absolute, out originUri))
+                !Uri.TryCreate(origin, UriKind.Absolute, out originUri) ||
+                !string.Equals(originUri.Authority, host, StringComparison.OrdinalIgnoreCase))
                 return false;
 
             string originHost = originUri.Host;
             bool localOrigin = string.Equals(originHost, "localhost", StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(originHost, "127.0.0.1", StringComparison.OrdinalIgnoreCase);
             bool productionOrigin = string.Equals(originHost, "wlo.kiaoragaming.xyz", StringComparison.OrdinalIgnoreCase);
-            if (localOrigin || (productionOrigin && originUri.Scheme == Uri.UriSchemeHttps))
+            bool privateLanOrigin = IsPrivateIpv4Address(originHost);
+            if (productionOrigin && originUri.Scheme == Uri.UriSchemeHttps)
+                return true;
+
+            if (localOrigin || privateLanOrigin)
             {
-                return originUri.Scheme == Uri.UriSchemeHttps ||
-                    (localOrigin && originUri.Scheme == Uri.UriSchemeHttp);
+                return originUri.Scheme == Uri.UriSchemeHttp ||
+                    originUri.Scheme == Uri.UriSchemeHttps;
             }
 
             return false;
+        }
+
+        static bool IsPrivateIpv4Address(string host)
+        {
+            IPAddress address;
+            if (!IPAddress.TryParse(host, out address) ||
+                address.AddressFamily != AddressFamily.InterNetwork)
+                return false;
+
+            byte[] bytes = address.GetAddressBytes();
+            return bytes[0] == 10 ||
+                (bytes[0] == 172 && bytes[1] >= 16 && bytes[1] <= 31) ||
+                (bytes[0] == 192 && bytes[1] == 168);
         }
 
         static byte[] ReadBody(Stream stream, int contentLength)

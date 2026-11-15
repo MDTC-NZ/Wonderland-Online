@@ -874,6 +874,11 @@ function changePassword() {
         document.getElementById('currentPassword').value = '';
         document.getElementById('newPassword').value = '';
         document.getElementById('confirmPassword').value = '';
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('username');
+        setTimeout(() => {
+            window.location.href = 'register.html#login';
+        }, 1500);
     }).catch(error => showMessage(error.message, 'error'));
 }
 

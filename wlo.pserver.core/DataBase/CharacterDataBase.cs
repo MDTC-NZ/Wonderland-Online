@@ -1383,7 +1383,7 @@ namespace DataBase
 
             #region Write Extr Data
 
-            try { src = GetDataTable(string.Format("SELECT * FROM {0} where {1}", "charactersExtData", "charID = '" + charID + "'")); }
+            try { src = GetDataTable(string.Format("SELECT * FROM {0} where {1}", "charactersextdata", "charID = '" + charID + "'")); }
             catch (MySqlException ex) { DebugSystem.Write(new ExceptionData(ex)); return false; }
 
             Dictionary<string, object> cols = new Dictionary<string, object>();
@@ -1395,12 +1395,12 @@ namespace DataBase
 
             if (src.Rows.Count == 0)
             {
-                try { Insert("charactersExtData", cols); }
+                try { Insert("charactersextdata", cols); }
                 catch (MySqlException ex) { DebugSystem.Write(new ExceptionData(ex)); throw; }
             }
             else
             {
-                try { Update("charactersExtData", cols, "charID = '" + charID + "';"); }
+                try { Update("charactersextdata", cols, "charID = '" + charID + "';"); }
                 catch (MySqlException ex) { DebugSystem.Write(new ExceptionData(ex)); throw; }
             }
             #endregion
@@ -1636,7 +1636,7 @@ namespace DataBase
             #endregion
 
             #region write ext data
-            ExecuteNonQuery(string.Format("UPDATE charactersExtData SET {0} where charID = '" + charID + "';", string.Format(" Settings = '{0}', Friends = '{1}', Guild = '{2}', Mail = '{3}'", player.Settings.ToString(), /*player.GetFriends_Flag*/"", "0", /*player.GetMailboxFlags()*/"")));
+            ExecuteNonQuery(string.Format("UPDATE charactersextdata SET {0} where charID = '" + charID + "';", string.Format(" Settings = '{0}', Friends = '{1}', Guild = '{2}', Mail = '{3}'", player.Settings.ToString(), /*player.GetFriends_Flag*/"", "0", /*player.GetMailboxFlags()*/"")));
             #endregion
 
             return true;

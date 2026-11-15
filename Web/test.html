@@ -85,16 +85,7 @@
     </div>
 
     <div class="test-section">
-        <h2>3️⃣ Test Password Reset</h2>
-        <input type="text" id="resetUsername" placeholder="Username" value="testuser123">
-        <input type="password" id="resetPassword" placeholder="New password" value="NewPass456">
-        <br>
-        <button class="test-button" onclick="testReset()">🔑 Reset Password</button>
-        <div id="resetOutput" class="output"></div>
-    </div>
-
-    <div class="test-section">
-        <h2>4️⃣ Navigate to Pages</h2>
+        <h2>3️⃣ Navigate to Pages</h2>
         <button class="test-button" onclick="window.location.href='http://localhost:8080/'">📄 Registration Page</button>
         <button class="test-button" onclick="window.location.href='http://localhost:8080/dashboard.html'">📊 Dashboard (if logged in)</button>
     </div>
@@ -106,7 +97,6 @@
             <li>Click "🔐 Login" to test login (stores token in localStorage)</li>
             <li>Click "📊 Dashboard" to view character management page</li>
             <li>Create characters, manage account, view events</li>
-            <li>Use "🔑 Reset Password" to test password recovery</li>
         </ol>
     </div>
 
@@ -213,45 +203,6 @@
             });
         }
 
-        function testReset() {
-            const username = document.getElementById('resetUsername').value.trim();
-            const password = document.getElementById('resetPassword').value;
-            const outputEl = 'resetOutput';
-
-            document.getElementById(outputEl).innerHTML = '';
-            log(outputEl, 'Attempting password reset...');
-
-            if (!username || !password) {
-                log(outputEl, 'ERROR: Please fill in all fields', true);
-                return;
-            }
-
-            const formData = new URLSearchParams();
-            formData.append('username', username);
-            formData.append('newPassword', password);
-
-            fetch(API_BASE + '/api/reset-password', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
-            })
-            .then(response => {
-                log(outputEl, `Response Status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                if (data.ok) {
-                    log(outputEl, `✅ ${data.message}`);
-                } else {
-                    log(outputEl, `❌ ${data.message}`, true);
-                }
-            })
-            .catch(error => {
-                log(outputEl, `❌ Error: ${error.message}`, true);
-            });
-        }
     </script>
 </body>
 </html>

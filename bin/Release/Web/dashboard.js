@@ -74,6 +74,9 @@ function wireDashboardEvents() {
         if (action === 'admin-refresh-accounts') loadAdminAccounts();
         else if (action === 'admin-refresh-characters') loadAdminCharacters();
         else if (action === 'admin-refresh-online') loadAdminOnlinePlayers();
+        else if (action === 'admin-refresh-game-players') loadAdminGamePlayers();
+        else if (action === 'admin-game-teleport') teleportAdminPlayer(actionButton.dataset.characterId, actionButton.dataset.characterName);
+        else if (action === 'admin-game-give-item') giveAdminPlayerItem(actionButton.dataset.characterId, actionButton.dataset.characterName);
         else if (action === 'admin-reset-password') resetAdminPassword(actionButton.dataset.accountId);
         else if (action === 'admin-toggle-role') toggleAdminRole(actionButton.dataset.accountId);
         else if (action === 'admin-delete-account') deleteAdminAccount(actionButton.dataset.accountId);
@@ -346,7 +349,7 @@ function loadAdminStatus() {
 }
 
 function loadAdminData() {
-    return Promise.all([loadAdminAccounts(), loadAdminCharacters(), loadAdminOnlinePlayers()])
+    return Promise.all([loadAdminAccounts(), loadAdminCharacters(), loadAdminOnlinePlayers(), loadAdminGamePlayers()])
         .catch(error => showMessage(error.message, 'error'));
 }
 
@@ -434,6 +437,52 @@ function loadAdminOnlinePlayers() {
         document.getElementById('adminOnlineBody').innerHTML = '<tr><td colspan="7">Online players could not be loaded.</td></tr>';
         throw error;
     });
+}
+
+function loadAdminGamePlayers() {
+    return adminPost('/game-players', {}).then(data => {
+        const body = document.getElementById('adminGamePlayersBody');
+        const players = data.players || [];
+        body.innerHTML = players.length ? players.map(player => `<tr>
+            <td>${escapeHtml(player.name)}</td>
+            <td>${Number(player.level)}</td>
+            <td>${Number(player.mapId)}${player.mapName ? ' — ' + escapeHtml(player.mapName) : ''}</td>
+            <td>${Number(player.x)}</td>
+            <td>${Number(player.y)}</td>
+            <td>
+                <button class="btn btn-secondary" type="button" data-action="admin-game-teleport" data-character-id="${Number(player.characterId)}" data-character-name="${escapeHtml(player.name)}">Teleport</button>
+                <button class="btn btn-secondary" type="button" data-action="admin-game-give-item" data-character-id="${Number(player.characterId)}" data-character-name="${escapeHtml(player.name)}">Give item</button>
+            </td>
+        </tr>`).join('') : '<tr><td colspan="6">No players are currently connected to the game world.</td></tr>';
+    }).catch(error => {
+        document.getElementById('adminGamePlayersBody').innerHTML = '<tr><td colspan="6">Live players could not be loaded.</td></tr>';
+        throw error;
+    });
+}
+
+function teleportAdminPlayer(characterId, characterName) {
+    const mapId = prompt('Destination map ID for ' + characterName + ':');
+    if (mapId === null) return;
+    const x = prompt('Destination X coordinate:');
+    if (x === null) return;
+    const y = prompt('Destination Y coordinate:');
+    if (y === null) return;
+    adminPost('/game-teleport', { characterId: String(characterId), mapId: mapId, x: x, y: y })
+        .then(data => {
+            showMessage(data.message, 'success');
+            loadAdminGamePlayers();
+        })
+        .catch(error => showMessage(error.message, 'error'));
+}
+
+function giveAdminPlayerItem(characterId, characterName) {
+    const itemId = prompt('Item ID to give to ' + characterName + ':');
+    if (itemId === null) return;
+    const amount = prompt('Amount to give (1-99):', '1');
+    if (amount === null) return;
+    adminPost('/game-give-item', { characterId: String(characterId), itemId: itemId, amount: amount })
+        .then(data => showMessage(data.message, 'success'))
+        .catch(error => showMessage(error.message, 'error'));
 }
 
 function createAdminAccount(event) {
@@ -825,6 +874,11 @@ function changePassword() {
         document.getElementById('currentPassword').value = '';
         document.getElementById('newPassword').value = '';
         document.getElementById('confirmPassword').value = '';
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('username');
+        setTimeout(() => {
+            window.location.href = 'register.html#login';
+        }, 1500);
     }).catch(error => showMessage(error.message, 'error'));
 }
 

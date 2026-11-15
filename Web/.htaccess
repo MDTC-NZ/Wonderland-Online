@@ -1,0 +1,12 @@
+Options -Indexes
+DirectoryIndex index.html register.html
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "DENY"
+</IfModule>
+
+<FilesMatch "(^\.|\.env|\.sql$|\.sqlite$|\.db$|\.bak$|\.log$|\.config$|\.cs$|\.csproj$|\.sln$|\.pfx$|\.pem$|\.key$|^app\.js$|^package(-lock)?\.json$)">
+    Require all denied
+</FilesMatch>

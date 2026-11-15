@@ -55,8 +55,8 @@
                 <article class="public-download-card">
                     <h3>Launcher and latest updates</h3>
                     <p id="latestUpdateSummary" role="status" aria-live="polite">Checking for updates…</p>
-                    <a class="btn btn-primary" href="/downloads/WloClientUpdater.exe">Download update launcher</a>
-                    <a class="manifest-link" href="/client-updates/manifest.json">View update manifest</a>
+                    <a id="updaterDownloadLink" class="btn btn-primary" href="/downloads/WloClientUpdater.exe" hidden>Download update launcher</a>
+                    <a id="updateManifestLink" class="manifest-link" href="/client-updates/manifest.json" hidden>View update manifest</a>
                     <ul id="latestUpdateFiles" class="latest-update-files"></ul>
                 </article>
             </div>
@@ -164,7 +164,7 @@
 
                 <div class="form-footer">
                     <p>Don't have an account? <a href="#" class="switch-tab" data-tab="register">Create one now</a></p>
-                    <p>Forgot your password? <a href="#" class="switch-tab" data-tab="forgot">Reset it here</a></p>
+                    <p>Forgot your password? <a href="#" class="switch-tab" data-tab="forgot">Get account help</a></p>
                 </div>
             </div>
         </div>
@@ -173,50 +173,15 @@
         <div class="tab-content" id="forgot">
             <div class="card">
                 <div class="card-header">
-                    <h2>Reset Your Password</h2>
-                    <p class="subtitle">Enter your username to receive password reset instructions</p>
+                    <h2>Password Help</h2>
+                    <p class="subtitle">Password recovery requires account verification.</p>
                 </div>
 
-                <form id="forgot-form" class="form">
-                    <div class="form-group">
-                        <label for="forgot-username">Username</label>
-                        <div class="input-wrapper">
-                            <input id="forgot-username" name="username" type="text" required
-                                   placeholder="Enter your username">
-                            <span class="input-icon">👤</span>
-                        </div>
-                    </div>
-
-                    <div id="forgot-step-2" class="hidden">
-                        <div class="form-group">
-                            <label for="new-password">New Password</label>
-                            <div class="input-wrapper">
-                                <input id="new-password" name="newPassword" type="password" minlength="4" maxlength="14"
-                                       placeholder="Enter new password">
-                                <span class="input-icon">🔒</span>
-                            </div>
-                            <p class="hint">4-14 characters for your security.</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-password-confirm">Confirm New Password</label>
-                            <div class="input-wrapper">
-                                <input id="new-password-confirm" name="newPasswordConfirm" type="password" minlength="4" maxlength="14"
-                                       placeholder="Confirm new password">
-                                <span class="input-icon">✓</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        <span class="btn-text" id="forgot-btn-text">Send Reset Link</span>
-                        <span class="btn-icon">→</span>
-                    </button>
-                    <p id="forgot-message" class="message" role="status" aria-live="polite"></p>
-                </form>
+                <p>To change your password, sign in and enter your current password in the dashboard.</p>
+                <p>If you have lost access to your account, contact a server administrator. Never send your password to anyone.</p>
 
                 <div class="form-footer">
-                    <p><a href="#" class="switch-tab" data-tab="register">Back to Registration</a></p>
+                    <p><a href="#" class="switch-tab" data-tab="login">Back to Login</a></p>
                 </div>
             </div>
         </div>
