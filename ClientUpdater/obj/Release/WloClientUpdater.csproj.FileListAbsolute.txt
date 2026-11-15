@@ -1,0 +1,16 @@
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\WloClientUpdater.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\bin\Release\WloClientUpdater.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\WloClientUpdater.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\WloClientUpdater.pdb
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\mscorlib.dll
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normidna.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfkc.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseDiag\normnfkd.nlp
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.AssemblyReference.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\obj\Release\WloClientUpdater.csproj.CoreCompileInputs.cache
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseAdminValidation\WloClientUpdater.exe
+C:\Users\hayde\Downloads\Wonderland-Develop\Wonderland-Develop\ClientUpdater\bin\ReleaseAdminValidation\WloClientUpdater.pdb

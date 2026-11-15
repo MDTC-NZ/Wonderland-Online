@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonderland Online - Account Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎮 Wonderland Online</h1>
+                <div class="header-info" id="headerInfo">
+                    <span class="username">Welcome, <strong id="usernameDisplay">Player</strong></span>
+                    <button class="logout-btn" data-action="logout">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="characters">⚔️ Characters</button>
+            <button class="tab-btn" data-tab="account">👤 Account</button>
+            <button class="tab-btn" data-tab="community">🌍 Community</button>
+            <button class="tab-btn" data-tab="events">🎉 Events & Rewards</button>
+            <button class="tab-btn" data-tab="shop">🛍️ Mall</button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Characters Tab -->
+            <section id="characters-tab" class="tab-content active">
+                <div class="section-header">
+                    <h2>⚔️ Your Characters</h2>
+                    <p>You have <strong id="charCount">0</strong> of <strong>2</strong> character slots</p>
+                    <button class="btn btn-primary" data-action="toggle-create">✨ Create Character</button>
+                </div>
+
+                <div class="characters-grid">
+                    <div id="characters-list" class="characters-list"></div>
+                </div>
+
+                <!-- Create Character Form -->
+                <div id="createCharForm" class="create-char-section hidden">
+                    <div class="form-card">
+                        <h3>✨ Create a Game Character</h3>
+                        
+                        <div class="form-group">
+                            <label for="charName">Character Name</label>
+                            <input type="text" id="charName" placeholder="Enter character name (4-14 characters)" maxlength="14">
+                            <small>Use 4-14 letters, numbers, or underscores.</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="charBody">Appearance</label>
+                                <select id="charBody">
+                                    <option value="">Choose an appearance…</option>
+                                    <option value="1">Small Male</option>
+                                    <option value="2">Small Female</option>
+                                    <option value="3">Big Male</option>
+                                    <option value="4">Big Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="charElement">Element</label>
+                                <select id="charElement">
+                                    <option value="">Choose an element…</option>
+                                    <option value="0">Normal</option>
+                                    <option value="1">Earth</option>
+                                    <option value="2">Water</option>
+                                    <option value="3">Fire</option>
+                                    <option value="4">Wind</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="character-preview">
+                            <h4>Character details</h4>
+                            <div class="preview-display">
+                                <div class="preview-class" id="previewBody">Choose an appearance</div>
+                                <div class="preview-race" id="previewElement">Choose an element</div>
+                                <div class="preview-name" id="previewName">Your Character</div>
+                            </div>
+                        </div>
+                        <p class="form-note">Your character is saved directly to the game database. After creation, sign in through the game client and select this character. Website creation does not launch the game.</p>
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary" data-action="create-character">Create Character</button>
+                            <button class="btn btn-secondary" data-action="toggle-create">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">⚔️</div>
+                    <h3>No characters yet</h3>
+                    <p>Create your first character to begin your adventure!</p>
+                    <button class="btn btn-primary" data-action="toggle-create">✨ Create Character</button>
+                </div>
+            </section>
+
+            <!-- Account Tab -->
+            <section id="account-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>👤 Account Settings</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Account Information</h3>
+                        <div class="info-group">
+                            <label>Username</label>
+                            <div class="info-value" id="accUsername">Loading...</div>
+                        </div>
+                        <div class="info-group">
+                            <label>Account Created</label>
+                            <div class="info-value" id="accCreated">-</div>
+                        </div>
+                        <div class="info-group">
+                            <label>Last Login</label>
+                            <div class="info-value" id="accLastLogin">-</div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password" autocomplete="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password" autocomplete="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm new password" autocomplete="new-password">
+                        </div>
+                        <button class="btn btn-primary" data-action="change-password">Update Password</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Account Stats</h3>
+                        <div class="stat-item">
+                            <span>📊 Total Playtime</span>
+                            <strong id="totalPlaytime">0 hours</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>🏆 Characters Created</span>
+                            <strong id="charsCreated">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>⭐ Total Level</span>
+                            <strong id="totalLevel">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>💰 Total Gold</span>
+                            <strong id="totalGold">0</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Tab -->
+            <section id="community-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>🌍 Mystic Woods Gaming Network</h2>
+                </div>
+
+                <div class="community-grid">
+                    <div class="community-card">
+                        <h3>👥 Active Players</h3>
+                        <div class="stat-display" id="activePlayers">Loading...</div>
+                        <p>Players online right now</p>
+                    </div>
+
+                    <div class="community-card">
+                        <h3>🌟 Total Players</h3>
+                        <div class="stat-display" id="totalPlayers">Loading...</div>
+                        <p>Registered accounts</p>
+                    </div>
+
+                    <div class="community-card">
+                        <h3>🎯 Guilds Active</h3>
+                        <div class="stat-display" id="totalGuilds">Loading...</div>
+                        <p>Player guilds formed</p>
+                    </div>
+
+                    <div class="community-card">
+                        <h3>🌐 Server Status</h3>
+                        <div class="status-badge" id="dashboardServerStatus" role="status">Checking…</div>
+                        <p><strong id="dashboardServersRunning">—</strong> game servers online</p>
+                    </div>
+                </div>
+
+                <div class="leaderboard-section">
+                    <h3>🏆 Top Players This Month</h3>
+                    <table class="leaderboard">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Character Name</th>
+                                <th>Level</th>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <tr><td colspan="4">Leaderboard data is not available.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Events & Rewards Tab -->
+            <section id="events-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>🎉 Events & Rewards</h2>
+                </div>
+
+                <div class="events-container">
+                    <div class="event-card">
+                        <div class="event-status">ACTIVE</div>
+                        <h3>⚔️ Winter Battle Tournament</h3>
+                        <p>Compete with other players in epic battles!</p>
+                        <div class="event-reward">
+                            <strong>Rewards:</strong> 10,000 Gold + Rare Armor Set
+                        </div>
+                        <div class="event-time">Ends in: <span id="timer1">7 days</span></div>
+                        <button class="btn btn-primary" data-action="join-event" data-event-id="tournament">Join Event</button>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-status">ACTIVE</div>
+                        <h3>🌙 Mystical Dungeons</h3>
+                        <p>Explore dangerous dungeons for treasure!</p>
+                        <div class="event-reward">
+                            <strong>Rewards:</strong> 5,000 Gold + Magical Artifacts
+                        </div>
+                        <div class="event-time">Ends in: <span id="timer2">14 days</span></div>
+                        <button class="btn btn-primary" data-action="join-event" data-event-id="dungeon">Explore</button>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-status">UPCOMING</div>
+                        <h3>🌸 Spring Festival</h3>
+                        <p>Celebrate the new season with special quests!</p>
+                        <div class="event-reward">
+                            <strong>Rewards:</strong> Festival Costume + Mount
+                        </div>
+                        <div class="event-time">Starts in: <span id="timer3">3 days</span></div>
+                        <button class="btn btn-secondary" disabled>Coming Soon</button>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-status">ACTIVE</div>
+                        <h3>📈 Level Up Bonus</h3>
+                        <p>Gain bonus experience while leveling up!</p>
+                        <div class="event-reward">
+                            <strong>Bonus:</strong> +50% Experience
+                        </div>
+                        <div class="event-time">Ends in: <span id="timer4">21 days</span></div>
+                        <button class="btn btn-primary" data-action="claim-reward" data-reward-id="bonus">Claim</button>
+                    </div>
+                </div>
+
+                <div class="rewards-section">
+                    <h3>💎 Your Reward Points</h3>
+                    <div class="rewards-display">
+                        <div class="reward-item">
+                            <span class="reward-icon">🎫</span>
+                            <div>
+                                <strong id="rewardPoints">0</strong>
+                                <p>In-Game Mall Points</p>
+                            </div>
+                            <span class="reward-use">Use in Mall →</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shop Tab -->
+            <section id="shop-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>🛍️ In-Game Mall</h2>
+                    <div class="balance-display">
+                        Your Points: <strong id="mallPoints">0</strong> 🎫
+                    </div>
+                </div>
+
+                <div class="mall-promotion">
+                    <strong>Launch promotion: 10% off eligible items</strong>
+                    <span>Prices and item IDs are verified by the game server.</span>
+                </div>
+                <div class="mall-toolbar">
+                    <label class="sr-only" for="mallSearch">Search items</label>
+                    <input type="search" id="mallSearch" placeholder="Search by item ID or category">
+                    <label class="sr-only" for="mallCharacter">Deliver to character</label>
+                    <select id="mallCharacter">
+                        <option value="">Loading characters…</option>
+                    </select>
+                </div>
+                <div class="mall-categories" id="mallCategories">
+                    <button class="category-btn active" data-category="all">All Items</button>
+                    <button class="category-btn" data-category="equipment">⚔ Equipment</button>
+                    <button class="category-btn" data-category="pets">🐾 Pets</button>
+                    <button class="category-btn" data-category="mounts">🛞 Mounts</button>
+                    <button class="category-btn" data-category="consumables">✦ Consumables</button>
+                </div>
+                <div class="mall-grid" id="mallGrid" aria-live="polite">
+                    <p class="mall-empty">Loading the in-game catalog…</p>
+                </div>
+                <div class="mall-review-panel hidden" id="mallReviewPanel">
+                    <h3>Item reviews</h3>
+                    <div id="mallReviews"></div>
+                    <form id="mallReviewForm">
+                        <input type="hidden" id="reviewItemId">
+                        <label for="reviewRating">Your rating</label>
+                        <select id="reviewRating" required>
+                            <option value="5">5 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="2">2 stars</option>
+                            <option value="1">1 star</option>
+                        </select>
+                        <label for="reviewText">Review</label>
+                        <textarea id="reviewText" maxlength="500" required></textarea>
+                        <button class="btn btn-primary" type="submit">Submit review</button>
+                        <button class="btn btn-secondary" type="button" data-action="close-reviews">Close</button>
+                    </form>
+                </div>
+                <section class="mall-newsletter">
+                    <h3>Get Mall updates</h3>
+                    <p>Subscribe for new item and promotion announcements. You can unsubscribe by contacting support.</p>
+                    <form id="mallNewsletterForm">
+                        <label class="sr-only" for="newsletterEmail">Email address</label>
+                        <input type="email" id="newsletterEmail" maxlength="254" placeholder="you@example.com" required>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" id="newsletterConsent" required>
+                            I agree to receive Mall update emails.
+                        </label>
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                    </form>
+                </section>
+                <section class="mall-support">
+                    <h3>Need help?</h3>
+                    <p>For purchase questions, contact <a id="mallSupportLink" href="mailto:support@wlo.kiaoragaming.xyz">support@wlo.kiaoragaming.xyz</a>.</p>
+                </section>
+            </section>
+        </main>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

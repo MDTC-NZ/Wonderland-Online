@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Registration System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 10px;
+        }
+        .test-button {
+            background: #00d4ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .test-button:hover {
+            background: #0099cc;
+        }
+        .output {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #00d4ff;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .success {
+            color: #2ecc71;
+        }
+        .error {
+            color: #e74c3c;
+        }
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Wonderland Online - System Test</h1>
+
+    <div class="test-section">
+        <h2>1️⃣ Test Account Creation</h2>
+        <input type="text" id="regUsername" placeholder="Username (4-14 chars)" value="testuser123">
+        <input type="password" id="regPassword" placeholder="Password (4-14 chars)" value="Test@123">
+        <input type="password" id="regConfirm" placeholder="Confirm password" value="Test@123">
+        <br>
+        <button class="test-button" onclick="testRegister()">📝 Create Account</button>
+        <div id="regOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2️⃣ Test Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username" value="testuser123">
+        <input type="password" id="loginPassword" placeholder="Password" value="Test@123">
+        <br>
+        <button class="test-button" onclick="testLogin()">🔐 Login</button>
+        <div id="loginOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3️⃣ Test Password Reset</h2>
+        <input type="text" id="resetUsername" placeholder="Username" value="testuser123">
+        <input type="password" id="resetPassword" placeholder="New password" value="NewPass456">
+        <br>
+        <button class="test-button" onclick="testReset()">🔑 Reset Password</button>
+        <div id="resetOutput" class="output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4️⃣ Navigate to Pages</h2>
+        <button class="test-button" onclick="window.location.href='http://localhost:8080/'">📄 Registration Page</button>
+        <button class="test-button" onclick="window.location.href='http://localhost:8080/dashboard.html'">📊 Dashboard (if logged in)</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Instructions</h2>
+        <ol>
+            <li>Click "📝 Create Account" to create a test account</li>
+            <li>Click "🔐 Login" to test login (stores token in localStorage)</li>
+            <li>Click "📊 Dashboard" to view character management page</li>
+            <li>Create characters, manage account, view events</li>
+            <li>Use "🔑 Reset Password" to test password recovery</li>
+        </ol>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080';
+
+        function log(elementId, message, isError = false) {
+            const el = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = isError ? 'error' : 'success';
+            el.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function testRegister() {
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+            const outputEl = 'regOutput';
+
+            document.getElementById(outputEl).innerHTML = '';
+            log(outputEl, 'Attempting registration...');
+
+            if (!username || !password || !confirm) {
+                log(outputEl, 'ERROR: Please fill in all fields', true);
+                return;
+            }
+
+            if (password !== confirm) {
+                log(outputEl, 'ERROR: Passwords do not match', true);
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('password', password);
+            formData.append('passwordConfirm', confirm);
+
+            fetch(API_BASE + '/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(response => {
+                log(outputEl, `Response Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                if (data.ok) {
+                    log(outputEl, `✅ ${data.message}`);
+                } else {
+                    log(outputEl, `❌ ${data.message}`, true);
+                }
+            })
+            .catch(error => {
+                log(outputEl, `❌ Error: ${error.message}`, true);
+            });
+        }
+
+        function testLogin() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const outputEl = 'loginOutput';
+
+            document.getElementById(outputEl).innerHTML = '';
+            log(outputEl, 'Attempting login...');
+
+            if (!username || !password) {
+                log(outputEl, 'ERROR: Please fill in all fields', true);
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('password', password);
+
+            fetch(API_BASE + '/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(response => {
+                log(outputEl, `Response Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                if (data.ok) {
+                    log(outputEl, `✅ ${data.message}`);
+                    log(outputEl, `Token: ${data.token.substring(0, 30)}...`);
+                    localStorage.setItem('userToken', data.token);
+                    localStorage.setItem('username', username);
+                    log(outputEl, '✅ Token saved to localStorage');
+                    log(outputEl, '→ Ready to access dashboard!');
+                } else {
+                    log(outputEl, `❌ ${data.message}`, true);
+                }
+            })
+            .catch(error => {
+                log(outputEl, `❌ Error: ${error.message}`, true);
+            });
+        }
+
+        function testReset() {
+            const username = document.getElementById('resetUsername').value.trim();
+            const password = document.getElementById('resetPassword').value;
+            const outputEl = 'resetOutput';
+
+            document.getElementById(outputEl).innerHTML = '';
+            log(outputEl, 'Attempting password reset...');
+
+            if (!username || !password) {
+                log(outputEl, 'ERROR: Please fill in all fields', true);
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('newPassword', password);
+
+            fetch(API_BASE + '/api/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(response => {
+                log(outputEl, `Response Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                if (data.ok) {
+                    log(outputEl, `✅ ${data.message}`);
+                } else {
+                    log(outputEl, `❌ ${data.message}`, true);
+                }
+            })
+            .catch(error => {
+                log(outputEl, `❌ Error: ${error.message}`, true);
+            });
+        }
+    </script>
+</body>
+</html>

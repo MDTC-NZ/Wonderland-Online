@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "1615eIaCJUQ=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'MySql.Data (>= 9.1.0)' for 'net462'.",
+      "projectPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+      "filePath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+      "libraryId": "MySql.Data",
+      "targetGraphs": [
+        "net462"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Microsoft.NETFramework.ReferenceAssemblies (>= 1.0.3)' for 'net462'.",
+      "projectPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+      "filePath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Phoenix.Core\\Phoenix.Core.csproj",
+      "libraryId": "Microsoft.NETFramework.ReferenceAssemblies",
+      "targetGraphs": [
+        "net462"
+      ]
+    }
+  ]
+}

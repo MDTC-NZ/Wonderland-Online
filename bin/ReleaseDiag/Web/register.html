@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create an account for the Wonderland Online private server.">
+    <title>Wonderland Online - Server Status and Registration</title>
+    <link rel="stylesheet" href="/register.css">
+    <script src="/config.js"></script>
+    <script src="/register.js" defer></script>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow"></div>
+        <div class="stars"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">✨ Wonderland Online ✨</h1>
+            <p class="tagline">Join the Adventure!</p>
+        </header>
+
+        <section class="public-hub" aria-labelledby="server-overview-title">
+            <div class="public-hub-heading">
+                <div>
+                    <h2 id="server-overview-title">Server status</h2>
+                    <p>Live status refreshes automatically.</p>
+                </div>
+                <span id="publicServerStatus" class="public-status-badge" role="status" aria-live="polite">Checking…</span>
+            </div>
+            <div class="public-status-grid">
+                <div class="public-status-card">
+                    <span>Game servers online</span>
+                    <strong id="publicServerCount">—</strong>
+                </div>
+                <div class="public-status-card">
+                    <span>Players online</span>
+                    <strong id="publicPlayerCount">—</strong>
+                </div>
+                <div class="public-status-card">
+                    <span>Game connection</span>
+                    <strong id="publicGameAddress">—</strong>
+                </div>
+            </div>
+            <p id="publicStatusChecked" class="public-status-updated">Getting current status…</p>
+
+            <div class="public-download-grid">
+                <article class="public-download-card">
+                    <h3>Download the game</h3>
+                    <p id="clientDownloadHint">The game-client download link has not been configured by the server administrator.</p>
+                    <a id="clientDownloadLink" class="btn btn-primary" href="#" hidden>Download game client</a>
+                </article>
+                <article class="public-download-card">
+                    <h3>Launcher and latest updates</h3>
+                    <p id="latestUpdateSummary" role="status" aria-live="polite">Checking for updates…</p>
+                    <a class="btn btn-primary" href="/downloads/WloClientUpdater.exe">Download update launcher</a>
+                    <a class="manifest-link" href="/client-updates/manifest.json">View update manifest</a>
+                    <ul id="latestUpdateFiles" class="latest-update-files"></ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="register">Create Account</button>
+            <button class="tab-button" data-tab="login">Login</button>
+            <button class="tab-button" data-tab="forgot">Forgot Password?</button>
+            <button class="tab-button" data-tab="login-info">Login Info</button>
+        </div>
+
+        <!-- Register Tab -->
+        <div class="tab-content active" id="register">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Create Your Account</h2>
+                    <p class="subtitle">Choose your game login details and join thousands of players!</p>
+                </div>
+
+                <form id="registration-form" class="form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input id="username" name="username" type="text" minlength="4" maxlength="14"
+                                   pattern="[A-Za-z0-9_]{4,14}" autocomplete="username" required
+                                   placeholder="Your game username">
+                            <span class="input-icon">👤</span>
+                        </div>
+                        <p class="hint">4-14 characters: letters, numbers, and underscores only.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input id="password" name="password" type="password" minlength="4" maxlength="14"
+                                   autocomplete="new-password" required placeholder="Enter password">
+                            <span class="input-icon">🔒</span>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <p class="strength-text">Password strength: <span id="strength">weak</span></p>
+                        </div>
+                        <p class="hint">4-14 characters for your security.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password-confirm">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <input id="password-confirm" name="passwordConfirm" type="password" minlength="4" maxlength="14"
+                                   autocomplete="new-password" required placeholder="Confirm password">
+                            <span class="input-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <p id="form-message" class="message" role="status" aria-live="polite"></p>
+                </form>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" class="switch-tab" data-tab="login">Login here</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Tab -->
+        <div class="tab-content" id="login">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Login to Your Account</h2>
+                    <p class="subtitle">Access your account and characters</p>
+                </div>
+
+                <form id="login-form" class="form">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <div class="input-wrapper">
+                            <input id="login-username" name="username" type="text" required
+                                   placeholder="Your game username">
+                            <span class="input-icon">👤</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-wrapper">
+                            <input id="login-password" name="password" type="password" required
+                                   placeholder="Enter your password">
+                            <span class="input-icon">🔒</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Login to Dashboard</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <p id="login-message" class="message" role="status" aria-live="polite"></p>
+                </form>
+
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" class="switch-tab" data-tab="register">Create one now</a></p>
+                    <p>Forgot your password? <a href="#" class="switch-tab" data-tab="forgot">Reset it here</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Tab -->
+        <div class="tab-content" id="forgot">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Reset Your Password</h2>
+                    <p class="subtitle">Enter your username to receive password reset instructions</p>
+                </div>
+
+                <form id="forgot-form" class="form">
+                    <div class="form-group">
+                        <label for="forgot-username">Username</label>
+                        <div class="input-wrapper">
+                            <input id="forgot-username" name="username" type="text" required
+                                   placeholder="Enter your username">
+                            <span class="input-icon">👤</span>
+                        </div>
+                    </div>
+
+                    <div id="forgot-step-2" class="hidden">
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <div class="input-wrapper">
+                                <input id="new-password" name="newPassword" type="password" minlength="4" maxlength="14"
+                                       placeholder="Enter new password">
+                                <span class="input-icon">🔒</span>
+                            </div>
+                            <p class="hint">4-14 characters for your security.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-password-confirm">Confirm New Password</label>
+                            <div class="input-wrapper">
+                                <input id="new-password-confirm" name="newPasswordConfirm" type="password" minlength="4" maxlength="14"
+                                       placeholder="Confirm new password">
+                                <span class="input-icon">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text" id="forgot-btn-text">Send Reset Link</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <p id="forgot-message" class="message" role="status" aria-live="polite"></p>
+                </form>
+
+                <div class="form-footer">
+                    <p><a href="#" class="switch-tab" data-tab="register">Back to Registration</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Info Tab -->
+        <div class="tab-content" id="login-info">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Login Information</h2>
+                    <p class="subtitle">How to access your account</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>🎮 Game Server Connection</h3>
+                    <div class="info-box">
+                        <p><strong>Server Address:</strong> wlo.kiaoragaming.xyz</p>
+                        <p><strong>Port:</strong> 6414</p>
+                        <p><strong>Username:</strong> Your account username</p>
+                        <p><strong>Password:</strong> Your account password</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>📱 Account Features</h3>
+                    <ul class="feature-list">
+                        <li>✨ Create account instantly</li>
+                        <li>🔐 Secure password protection</li>
+                        <li>🎯 Multiple character slots</li>
+                        <li>💾 Auto-save progress</li>
+                        <li>🌍 Global player community</li>
+                        <li>🎉 Regular events and rewards</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>❓ Need Help?</h3>
+                    <div class="info-box">
+                        <p>Forgot your password? <a href="#" class="switch-tab" data-tab="forgot">Click here to reset it</a></p>
+                        <p>New to Wonderland Online? <a href="#" class="switch-tab" data-tab="register">Create your account now</a></p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>🛡️ Security Tips</h3>
+                    <ul class="feature-list">
+                        <li>Use a strong, unique password</li>
+                        <li>Don't share your login credentials</li>
+                        <li>Keep your account information private</li>
+                        <li>Report suspicious activity immediately</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🌟 Welcome to Wonderland Online - Your Adventure Awaits! 🌟</p>
+            <p class="footer-small">This is a private server. Game client required to play.</p>
+        </footer>
+    </div>
+</body>
+</html>

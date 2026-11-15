@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "SN5spZzXcKw=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\Wlo.Core.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "Unable to resolve 'Microsoft.NETFramework.ReferenceAssemblies (>= 1.0.3)' for 'net462'.",
+      "projectPath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\Wlo.Core.csproj",
+      "filePath": "C:\\Users\\hayde\\Downloads\\Wonderland-Develop\\Wonderland-Develop\\Wlo.Core\\Wlo.Core.csproj",
+      "libraryId": "Microsoft.NETFramework.ReferenceAssemblies",
+      "targetGraphs": [
+        "net462"
+      ]
+    }
+  ]
+}
